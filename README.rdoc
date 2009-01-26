@@ -20,11 +20,29 @@ Some, however, require you to supply your own answer.  If you see the method +__
 double underscore) listed, it is a hint to you to supply your own code in order to 
 make it work correctly.  
 
+== Installing Ruby
+
+If you do not have Ruby setup, please visit http://ruby-lang.org/en/downloads/ for 
+operating specific instructions.  In order to run this you need ruby and rake 
+installed. To check the installations simply type:
+
+*nix platforms from any terminal window:
+
+   [~] $ ruby --version
+   [~] $ rake --version
+
+Windows from the command prompt (cmd.exe)
+
+   c:\ruby --version 
+   c:\rake --version
+   
+Any response for Ruby with a version number greater than 1.8 is fine (should be 
+around 1.8.6 or more). Any version of rake will do.  
 
 == The Path To Enlightenment
 
-In order to achieve enlightenment you need to follow the path_to_enlightenment. This
-can be done in two ways
+You can run the tests through rake or by calling the file itself (rake is the
+recommended way to run them as we might build more functionality into this task).
 
 *nix platforms, from the koans directory
 
@@ -104,4 +122,11 @@ Try Ruby in your browser        ::  http://tryruby.hobix.com/
 Dave Thomas' introduction to Ruby Programming Ruby (the Pick Axe) ::  http://pragprog.com/titles/ruby/programming-ruby
 
 Brian Marick's fantastic guide for beginners Everyday Scripting with Ruby    ::  http://pragprog.com/titles/bmsft/everyday-scripting-with-ruby
+
+= Other stuff
+
+Author::   Jim Weirich <jim@weirichhouse.org>
+Author::   Joe O'Brien <joe@edgecase.com>
+Requires:: Ruby 1.8.x or later and Rake (any version)
+
 
