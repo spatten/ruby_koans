@@ -9,7 +9,7 @@ class AboutClassMethods < EdgeCase::Koan
     assert_equal __, fido.is_a?(Object)
   end
 
-  def test_classes_are_objects_too
+  def test_classes_are_classes
     assert_equal __, Dog.is_a?(Class)
   end
 
@@ -34,7 +34,7 @@ class AboutClassMethods < EdgeCase::Koan
     assert_equal __, fido.wag
   end
 
-  def test_other_objects_are_affected_by_these_singleton_methods
+  def test_other_objects_are_not_affected_by_these_singleton_methods
     fido = Dog.new
     rover = Dog.new
     def fido.wag
@@ -48,24 +48,24 @@ class AboutClassMethods < EdgeCase::Koan
 
   # ------------------------------------------------------------------
   
-  def Dog.wag
-    :class_level_wag
-  end
-
-  class Dog
+  class Dog2
     def wag
       :instance_level_wag
     end
   end
 
+  def Dog2.wag
+    :class_level_wag
+  end
+
   def test_since_classes_are_objects_you_can_define_singleton_methods_on_them_too
-    assert_equal __, Dog.a_class_method
+    assert_equal __, Dog2.wag
   end
 
   def test_class_methods_are_independent_of_instance_methods
-    fido = Dog.new
+    fido = Dog2.new
     assert_equal __, fido.wag
-    assert_equal __, Dog.wag
+    assert_equal __, Dog2.wag
   end
 
   # ------------------------------------------------------------------
