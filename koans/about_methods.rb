@@ -72,7 +72,7 @@ class AboutMethods < EdgeCase::Koan
   def method_with_explicit_return
     :a_non_return_value
     return :return_value
-    :anoher_non_return_value
+    :another_non_return_value
   end
 
   def test_method_with_explicit_return
