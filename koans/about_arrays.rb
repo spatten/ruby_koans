@@ -80,22 +80,4 @@ class AboutArrays < EdgeCase::Koan
     assert_equal __, array
   end
 
-  def test_parallel_assignments
-    first_name, last_name = ["John", "Smith"]
-    assert_equal __, first_name
-    assert_equal __, last_name
-  end
-
-  def test_parallel_assignments_with_extra_values
-    first_name, last_name = ["John", "Smith", "III"]
-    assert_equal __, first_name
-    assert_equal __, last_name
-  end
-
-  def test_parallel_assignments_with_extra_variables
-    first_name, last_name = ["Cher"]
-    assert_equal __, first_name
-    assert_equal __, last_name
-  end
-
 end
