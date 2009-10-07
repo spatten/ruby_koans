@@ -118,7 +118,7 @@ Meta Koans        ::  http://rubyquiz.com/quiz67.html
 == Other Resources
 
 The Ruby Language               ::  http://ruby-lang.org
-Try Ruby in your browser        ::  http://tryruby.hobix.com/
+Try Ruby in your browser        ::  http://tryruby.sophrinix.com
 
 Dave Thomas' introduction to Ruby Programming Ruby (the Pick Axe) ::  http://pragprog.com/titles/ruby/programming-ruby
 
