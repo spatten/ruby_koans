@@ -38,16 +38,10 @@ class AboutHashes < EdgeCase::Koan
     assert_equal hash1, hash2    
   end
 
- def test_hash_keys_and_values
+  def test_hash_keys_and_values
     hash = { :one => "uno", :two => "dos" }
 
-    assert_equal __, hash.keys.size
-    assert_equal __, hash.has_key?(:one)
-
-    # Why not just compare hash.keys to [:one, :two]?
-    #
-    # Clue: What was the name of the previous test again?
-
+    assert_equal __, hash.keys.sort
     assert_equal __, hash.values.sort
   end
 
