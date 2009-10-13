@@ -1,6 +1,6 @@
 # The path to Ruby Enlightenment starts with the following:
 
-require 'about_basics'
+require 'about_asserts'
 require 'about_nil'
 require 'about_arrays'
 require 'about_array_assignment'
