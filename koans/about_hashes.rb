@@ -35,14 +35,23 @@ class AboutHashes < EdgeCase::Koan
     hash1 = { :one => "uno", :two => "dos" }
     hash2 = { :two => "dos", :one => "uno" }
 
-    assert_equal hash1, hash2    
+    assert_equal hash1, hash2
   end
 
-  def test_hash_keys_and_values
+  def test_hash_keys
     hash = { :one => "uno", :two => "dos" }
+    assert_equal __, hash.keys.size
+    assert_equal __, hash.keys.include?(:one)
+    assert_equal __, hash.keys.include?(:two)
+    assert_equal Array, hash.keys.class
+  end
 
-    assert_equal __, hash.keys.sort
-    assert_equal __, hash.values.sort
+  def test_hash_values
+    hash = { :one => "uno", :two => "dos" }
+    assert_equal __, hash.keys.size
+    assert_equal __, hash.values.include?("uno")
+    assert_equal __, hash.values.include?("dos")
+    assert_equal Array, hash.values.class
   end
 
   def test_combining_hashes

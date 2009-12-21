@@ -128,7 +128,7 @@ EOS
     assert_equal __('The value is #{value}'), string
   end
 
-  def test_any_ruby_expression_my_be_interpolated
+  def test_any_ruby_expression_may_be_interpolated
     string = "The square root of 5 is #{Math.sqrt(5)}"
     assert_equal __("The square root of 5 is 2.23606797749979"), string
   end

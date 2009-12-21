@@ -25,7 +25,7 @@ require 'edgecase'
 # score([3,4,5,3,3]) => 350 points
 # score([1,5,1,2,4]) => 250 points
 #
-# More scoing examples are given in the tests below:
+# More scoring examples are given in the tests below:
 #
 # Your goal is to write the score method.
 

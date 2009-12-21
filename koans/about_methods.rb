@@ -18,7 +18,7 @@ class AboutMethods < EdgeCase::Koan
   # (NOTE: We are Using eval below because the example code is
   # considered to be syntactically invalid).
   def test_sometimes_missing_parenthesis_are_ambiguous
-    eval "assert_equal 5, my_global_method 2, 3"
+    eval "assert_equal 5, my_global_method 2, 3" # ENABLE CHECK
     #
     # Ruby doesn't know if you mean:
     #
@@ -36,12 +36,12 @@ class AboutMethods < EdgeCase::Koan
     exception = assert_raise(___) do
       my_global_method
     end
-    assert_equal __, exception.message
+    assert_match(/__/, exception.message)
 
     exception = assert_raise(___) do
       my_global_method(1,2,3)
     end
-    assert_equal __, exception.message
+    assert_match(/__/, exception.message)
   end
 
   # ------------------------------------------------------------------

@@ -11,7 +11,7 @@ class AboutControlStatements < EdgeCase::Koan
     assert_equal __, result
   end
 
-  def test_if_then_statements
+  def test_if_then_else_statements
     result = :default_value
     if true
       result = :true_value

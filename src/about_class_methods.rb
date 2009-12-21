@@ -19,11 +19,11 @@ class AboutClassMethods < EdgeCase::Koan
 
   def test_objects_have_methods
     fido = Dog.new
-    assert_equal __(45), fido.methods.size
+    assert_equal __(44), fido.methods.size
   end
 
   def test_classes_have_methods
-    assert_equal __(80), Dog.methods.size
+    assert_equal __(79), Dog.methods.size
   end
 
   def test_you_can_define_methods_on_individual_objects
@@ -34,9 +34,12 @@ class AboutClassMethods < EdgeCase::Koan
     assert_equal __(:fidos_wag), fido.wag
   end
 
-  def test_other_objects_are_unaffected_by_these_singleton_methods
+  def test_other_objects_are_not_affected_by_these_singleton_methods
     fido = Dog.new
     rover = Dog.new
+    def fido.wag
+      :fidos_wag
+    end
 
     assert_raise(___(NoMethodError)) do
       rover.wag
@@ -45,24 +48,24 @@ class AboutClassMethods < EdgeCase::Koan
 
   # ------------------------------------------------------------------
   
-  def Dog.bark
-    :class_level_bark
-  end
-
-  class Dog
-    def bark
-      :instance_level_bark
+  class Dog2
+    def wag
+      :instance_level_wag
     end
   end
 
+  def Dog2.wag
+    :class_level_wag
+  end
+
   def test_since_classes_are_objects_you_can_define_singleton_methods_on_them_too
-    assert_equal __(:class_level_bark), Dog.bark
+    assert_equal __(:class_level_wag), Dog2.wag
   end
 
   def test_class_methods_are_independent_of_instance_methods
-    fido = Dog.new
-    assert_equal __(:instance_level_bark), fido.bark
-    assert_equal __(:class_level_bark), Dog.bark
+    fido = Dog2.new
+    assert_equal __(:instance_level_wag), fido.wag
+    assert_equal __(:class_level_wag), Dog2.wag
   end
 
   # ------------------------------------------------------------------
@@ -155,7 +158,7 @@ class AboutClassMethods < EdgeCase::Koan
   #   end
   #
   # Which do you prefer and why?
-  # Are there times you might prefer the other way?
+  # Are there times you might prefer one over the other?
 
   # ------------------------------------------------------------------
 

@@ -14,6 +14,14 @@ def ___(value=FillMeInError)
   value
 end
 
+class Object
+  def ____(method=nil)
+    if method
+      self.send(method)
+    end
+  end
+end
+
 module EdgeCase
   class Sensei
     attr_reader :failure, :failed_test

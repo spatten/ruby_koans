@@ -42,7 +42,6 @@ class AboutArrays < EdgeCase::Koan
     assert_equal __([]), array[4,0]
     assert_equal __([]), array[4,100]
     assert_equal __(nil), array[5,0]
-    assert_equal __(nil), array[5,0]
   end
 
   def test_arrays_and_ranges
@@ -57,7 +56,7 @@ class AboutArrays < EdgeCase::Koan
 
     assert_equal __([:peanut, :butter, :and]), array[0..2]
     assert_equal __([:peanut, :butter]), array[0...2]
-    assert_equal ([:and, :jelly]), array[2..-1]
+    assert_equal __([:and, :jelly]), array[2..-1]
   end
 
   def test_pushing_and_popping_arrays

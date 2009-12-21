@@ -40,6 +40,7 @@ class AboutArrays < EdgeCase::Koan
     assert_equal __, array[2,2]
     assert_equal __, array[2,20]
     assert_equal __, array[4,0]
+    assert_equal __, array[4,100]
     assert_equal __, array[5,0]
   end
 

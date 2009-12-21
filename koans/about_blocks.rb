@@ -77,7 +77,7 @@ class AboutBlocks < EdgeCase::Koan
   def test_stand_alone_blocks_can_be_passed_to_methods_expecting_blocks
     make_upper = lambda { |n| n.upcase }
     result = method_with_block_arguments(&make_upper)
-    assert_equal __, result    
+    assert_equal __, result
   end
 
   # ------------------------------------------------------------------
