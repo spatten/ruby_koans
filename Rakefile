@@ -6,12 +6,10 @@ require 'rake/rdoctask'
 
 SRC_DIR      = 'src'
 PROB_DIR     = 'koans'
-SOLUTION_DIR = 'solution'
 DIST_DIR     = 'dist'
 
 SRC_FILES = FileList["#{SRC_DIR}/*"]
 KOAN_FILES = SRC_FILES.pathmap("#{PROB_DIR}/%f")
-SOLUTION_FILES = SRC_FILES.pathmap("#{SOLUTION_DIR}/%f")
 
 TAR_FILE = "#{DIST_DIR}/rubykoans.tgz"
 ZIP_FILE = "#{DIST_DIR}/rubykoans.zip"
@@ -64,7 +62,6 @@ end
 
 directory DIST_DIR
 directory PROB_DIR
-directory SOLUTION_DIR
 
 file ZIP_FILE => KOAN_FILES + [DIST_DIR] do
   sh "zip #{ZIP_FILE} #{PROB_DIR}/*"
@@ -92,9 +89,13 @@ task :check do
 end
 
 task :regen => [:clobber_koans, :gen]
-task :gen => KOAN_FILES 
+task :gen => KOAN_FILES + [PROB_DIR + "/README.rdoc"]
 task :clobber_koans do
   rm_r PROB_DIR
+end
+
+file PROB_DIR + "/README.rdoc" => "README.rdoc" do |t|
+  cp "README.rdoc", t.name
 end
 
 SRC_FILES.each do |koan_src|
