@@ -13,7 +13,14 @@ class AboutAsserts < EdgeCase::Koan
   # Enlightenment may be more easily achieved with appropriate
   # messages.
   def test_assert_with_message
+    #--
+    assert true, "This should be true -- Please fix this"
+    if false
+    #++
     assert false, "This should be true -- Please fix this"
+    #--
+    end
+    #++
   end
 
   # To understand reality, we must compare our expectations against
