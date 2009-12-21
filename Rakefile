@@ -2,6 +2,7 @@
 # -*- ruby -*-
 
 require 'rake/clean'
+require 'rake/rdoctask'
 
 SRC_DIR      = 'src'
 PROB_DIR     = 'koans'
@@ -47,6 +48,18 @@ module Koans
       end
     end
   end
+end
+
+task :default => :walk_the_path
+
+task :walk_the_path do
+  cd 'koans'
+  ruby 'path_to_enlightenment.rb'
+end
+
+Rake::RDocTask.new do |rd|
+  rd.main = "README.rdoc"
+  rd.rdoc_files.include("README.rdoc", "koans/*.rb")
 end
 
 directory DIST_DIR
