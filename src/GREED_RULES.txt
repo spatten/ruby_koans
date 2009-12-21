@@ -1,12 +1,12 @@
 = Playing Greed
 
-Greed is a dice game played amoung 2 or more players, using 5
+Greed is a dice game played among 2 or more players, using 5
 six-sided dice.
 
 == Playing Greed
 
 Each player takes a turn consisting of one or more rolls of the dice.
-On the first roll of the game, a player rolls all six dice which are
+On the first roll of the game, a player rolls all five dice which are
 scored according to the following:
 
   Three 1's => 1000 points
@@ -37,8 +37,8 @@ final example.
 
 After a player rolls and the score is calculated, the scoring dice are
 removed and the player has the option of rolling again using only the
-non-scoring dice. If there all no non-scoring dice), then the player
-may roll all 5 dice in the next roll.
+non-scoring dice. If all of the thrown dice are scoring, then the
+player may roll all 5 dice in the next roll.
 
 The player may continue to roll as long as each roll scores points. If
 a roll has zero points, then the player loses not only their turn, but
