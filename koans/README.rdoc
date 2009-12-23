@@ -76,7 +76,7 @@ The very first time you run it you will see the following output:
     <false> is not true.
     
     Please meditate on the following code:
-    ./about_basics.rb:10:in `test_assert_truth'
+    ./about_asserts.rb:10:in `test_assert_truth'
     path_to_enlightenment.rb:27
 
     mountains are merely mountains
@@ -85,10 +85,10 @@ You have come to your first stage. If you notice it is telling you where to look
 the first solution:
 
     Please meditate on the following code:
-    ./about_basics.rb:10:in `test_assert_truth'
+    ./about_asserts.rb:10:in `test_assert_truth'
     path_to_enlightenment.rb:27
     
-We then open up the about_basics.rb file and look at the first test:
+We then open up the about_asserts.rb file and look at the first test:
 
     # We shall contemplate truth by testing reality, via asserts.
     def test_assert_truth
@@ -110,10 +110,13 @@ A special thanks to Mike Clark and Ara Howard for inspiring this project.  Mike 
 wrote an excellent blog post about learning Ruby through unit testing. This sparked 
 an idea that has taken a bit to solidify, that of bringing new rubyists into the 
 community through testing. Ara Howard then gave us the idea for the Koans in his 
-ruby quiz entry an Meta Koans (a must for any rubyist wanting to improve their skills).
+ruby quiz entry an Meta Koans (a must for any rubyist wanting to
+improve their skills).  Also, "The Little Lisper" taught us all the
+value of the short questions/simple answers style of learning.
 
 Mike Clark's post ::  http://www.clarkware.com/cgi/blosxom/2005/03/18
 Meta Koans        ::  http://rubyquiz.com/quiz67.html
+The Little Lisper ::  http://www.amazon.com/Little-LISPer-Third-Daniel-Friedman/dp/0023397632
 
 == Other Resources
 

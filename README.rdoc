@@ -76,7 +76,7 @@ The very first time you run it you will see the following output:
     <false> is not true.
     
     Please meditate on the following code:
-    ./about_basics.rb:10:in `test_assert_truth'
+    ./about_asserts.rb:10:in `test_assert_truth'
     path_to_enlightenment.rb:27
 
     mountains are merely mountains
@@ -85,10 +85,10 @@ You have come to your first stage. If you notice it is telling you where to look
 the first solution:
 
     Please meditate on the following code:
-    ./about_basics.rb:10:in `test_assert_truth'
+    ./about_asserts.rb:10:in `test_assert_truth'
     path_to_enlightenment.rb:27
     
-We then open up the about_basics.rb file and look at the first test:
+We then open up the about_asserts.rb file and look at the first test:
 
     # We shall contemplate truth by testing reality, via asserts.
     def test_assert_truth
