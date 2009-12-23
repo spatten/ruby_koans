@@ -7,7 +7,7 @@ class AboutAsserts < EdgeCase::Koan
 
   # We shall contemplate truth by testing reality, via asserts.
   def test_assert_truth
-    assert true                 # This should be true
+    assert false                # This should be true
   end
 
   # Enlightenment may be more easily achieved with appropriate
