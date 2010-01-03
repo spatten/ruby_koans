@@ -82,15 +82,15 @@ class AboutBlocks < EdgeCase::Koan
 
   # ------------------------------------------------------------------
 
-  def method_with_explict_block(&block)
+  def method_with_explicit_block(&block)
     block.call(10)
   end
 
   def test_methods_can_take_an_explicit_block_argument
-    assert_equal __(20), method_with_explict_block { |n| n * 2 }
+    assert_equal __(20), method_with_explicit_block { |n| n * 2 }
 
     add_one = lambda { |n| n + 1 }
-    assert_equal __(11), method_with_explict_block(&add_one)
+    assert_equal __(11), method_with_explicit_block(&add_one)
   end
 
 end
