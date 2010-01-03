@@ -106,13 +106,14 @@ the statement is +false+.
  
 == Inspiration
 
-A special thanks to Mike Clark and Ara Howard for inspiring this project.  Mike Clark
-wrote an excellent blog post about learning Ruby through unit testing. This sparked 
-an idea that has taken a bit to solidify, that of bringing new rubyists into the 
-community through testing. Ara Howard then gave us the idea for the Koans in his 
-ruby quiz entry an Meta Koans (a must for any rubyist wanting to
-improve their skills).  Also, "The Little Lisper" taught us all the
-value of the short questions/simple answers style of learning.
+A special thanks to Mike Clark and Ara Howard for inspiring this
+project.  Mike Clark wrote an excellent blog post about learning Ruby
+through unit testing. This sparked an idea that has taken a bit to
+solidify, that of bringing new rubyists into the community through
+testing. Ara Howard then gave us the idea for the Koans in his ruby
+quiz entry on Meta Koans (a must for any rubyist wanting to improve
+their skills).  Also, "The Little Lisper" taught us all the value of
+the short questions/simple answers style of learning.
 
 Mike Clark's post ::  http://www.clarkware.com/cgi/blosxom/2005/03/18
 Meta Koans        ::  http://rubyquiz.com/quiz67.html
