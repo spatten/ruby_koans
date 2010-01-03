@@ -88,7 +88,10 @@ task :check do
   puts "# of about requires: #{about_requires}"
 end
 
+desc "Generate the Koans from the source files from scratch."
 task :regen => [:clobber_koans, :gen]
+
+desc "Generate the Koans from the changed source files."
 task :gen => KOAN_FILES + [PROB_DIR + "/README.rdoc"]
 task :clobber_koans do
   rm_r PROB_DIR
