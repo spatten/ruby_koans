@@ -67,7 +67,7 @@ class AboutScoringAssignment < EdgeCase::Koan
     assert_equal 100, score([1])
   end
 
-  def test_score_of_mulitple_1s_and_5s_is_the_sum
+  def test_score_of_mulitple_1s_and_5s_is_the_sum_of_individual_scores
     assert_equal 300, score([1,5,5,1])
   end
 
