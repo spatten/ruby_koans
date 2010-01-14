@@ -48,7 +48,7 @@ class AboutHashes < EdgeCase::Koan
 
   def test_hash_values
     hash = { :one => "uno", :two => "dos" }
-    assert_equal __, hash.keys.size
+    assert_equal __, hash.values.size
     assert_equal __, hash.values.include?("uno")
     assert_equal __, hash.values.include?("dos")
     assert_equal Array, hash.values.class
