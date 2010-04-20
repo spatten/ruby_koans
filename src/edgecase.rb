@@ -10,6 +10,10 @@ def __(value="FILL ME IN")
   value
 end
 
+def _n_(value=999999)
+  value
+end
+
 def ___(value=FillMeInError)
   value
 end
