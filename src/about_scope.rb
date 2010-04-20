@@ -74,6 +74,6 @@ class AboutScope < EdgeCase::Koan
 
   def test_you_can_get_a_list_of_constants_for_any_class_or_module
     assert_equal __(["Dog"]), Jims.constants
-    assert_equal __(122), Object.constants.size
+    assert Object.constants.size > _n_(10)
   end
 end
