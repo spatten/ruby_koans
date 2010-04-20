@@ -49,7 +49,6 @@ class AboutMessagePassing < EdgeCase::Koan
 
   class MessageCatcher
     def add_a_payload(*args)
-      return :empty unless args
       args
     end
   end
