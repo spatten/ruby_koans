@@ -36,13 +36,27 @@ class Object
       self.send(method)
     end
   end
+
+  in_ruby_version("1.9") do
+    public :method_missing
+  end
 end
 
 module EdgeCase
   class Sensei
     attr_reader :failure, :failed_test
 
-    AssertionError = Test::Unit::AssertionFailedError
+    in_ruby_version("1.8") do
+      AssertionError = Test::Unit::AssertionFailedError
+    end
+
+    in_ruby_version("1.9") do
+      if defined?(MiniTest)
+        AssertionError = MiniTest::Assertion
+      else
+        AssertionError = Test::Unit::AssertionFailedError
+      end
+    end
 
     def initialize
       @pass_count = 0
@@ -165,12 +179,12 @@ module EdgeCase
         test.setup
         begin
           test.send(method)
-        rescue StandardError => ex
+        rescue StandardError, EdgeCase::Sensei::AssertionError => ex
           test.failed(ex)
         ensure
           begin
             test.teardown
-          rescue StandardError => ex
+          rescue StandardError, EdgeCase::Sensei::AssertionError => ex
             test.failed(ex) if test.passed?
           end
         end
