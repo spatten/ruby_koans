@@ -1,4 +1,4 @@
-require 'edgecase'
+require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 class AboutModules < EdgeCase::Koan
   module Nameable
