@@ -20,7 +20,7 @@ class AboutConstants < EdgeCase::Koan
   end
 
   # ------------------------------------------------------------------
-  
+
   class Animal
     LEGS = 4
     def legs_in_animal
@@ -33,25 +33,25 @@ class AboutConstants < EdgeCase::Koan
       end
     end
   end
-  
+
   def test_nested_classes_inherit_constants_from_enclosing_classes
-    assert_equal __(4), Animal::NestedAnimal.new.legs_in_nested_animal    
+    assert_equal __(4), Animal::NestedAnimal.new.legs_in_nested_animal
   end
 
   # ------------------------------------------------------------------
-  
+
   class Reptile < Animal
     def legs_in_reptile
       LEGS
     end
   end
-  
+
   def test_subclasses_inherit_constants_from_parent_classes
     assert_equal __(4), Reptile.new.legs_in_reptile
   end
-  
+
   # ------------------------------------------------------------------
-  
+
   class MyAnimals
     LEGS = 2
 
@@ -61,16 +61,16 @@ class AboutConstants < EdgeCase::Koan
       end
     end
   end
-  
+
   def test_who_wins_with_both_nested_and_inherited_constants
     assert_equal __(2), MyAnimals::Bird.new.legs_in_bird
   end
-  
+
   # QUESTION: Which has precedence: The constant in the lexical scope,
   # or the constant from the inheritance heirarachy?
-  
+
   # ------------------------------------------------------------------
-  
+
   class MyAnimals::Oyster < Animal
     def legs_in_oyster
       LEGS
@@ -83,5 +83,5 @@ class AboutConstants < EdgeCase::Koan
 
   # QUESTION: Now Which has precedence: The constant in the lexical
   # scope, or the constant from the inheritance heirarachy?  Why is it
-  # different?
+  # different than the previous answer?
 end
