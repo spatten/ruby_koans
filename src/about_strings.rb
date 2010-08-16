@@ -166,7 +166,7 @@ EOS
 
     # NOTE: Patterns are formed from Regular Expressions.  Ruby has a
     # very powerful Regular Expression library.  Unfortunately, time
-    # does not permit us to explore it in detail in Ruby 101.
+    # does not permit us to explore it in detail now.
   end
 
   def test_strings_can_be_joined
