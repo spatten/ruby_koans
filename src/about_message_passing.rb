@@ -1,28 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 class AboutMessagePassing < EdgeCase::Koan
-  
+
   class MessageCatcher
     def caught?
       true
     end
   end
-    
+
   def test_methods_can_be_called_directly
     mc = MessageCatcher.new
-    
-    assert mc.caught?    
+
+    assert mc.caught?
   end
-  
+
   def test_methods_can_be_invoked_by_sending_the_message
     mc = MessageCatcher.new
-    
+
     assert mc.send(:caught?)
   end
-  
+
   def test_methods_can_be_invoked_more_dynamically
     mc = MessageCatcher.new
-    
+
     assert mc.send("caught?")
     assert mc.send("caught" + __("?") )    # What do you need to add to the first string?
     assert mc.send("CAUGHT?".____(:downcase) )      # What would you need to do to the string?
@@ -40,11 +40,11 @@ class AboutMessagePassing < EdgeCase::Koan
 
   def test_classes_can_be_asked_if_they_know_how_to_respond
     mc = MessageCatcher.new
-    
+
     assert_equal __(true), mc.respond_to?(:caught?)
     assert_equal __(false), mc.respond_to?(:does_not_exist)
   end
-  
+
   # ------------------------------------------------------------------
 
   class MessageCatcher
@@ -52,10 +52,10 @@ class AboutMessagePassing < EdgeCase::Koan
       args
     end
   end
-  
+
   def test_sending_a_message_with_arguments
     mc = MessageCatcher.new
-    
+
     assert_equal __([]), mc.add_a_payload
     assert_equal __([]), mc.send(:add_a_payload)
 
@@ -89,6 +89,18 @@ class AboutMessagePassing < EdgeCase::Koan
     #
     # If the method :method_missing causes the NoMethodError, then
     # what would happen if we redefine method_missing?
+    #
+    # NOTE:
+    #
+    # In Ruby 1.8 the method_missing method is public and can be
+    # called as shown above.  However, in Ruby 1.9 the method_missing
+    # method is private.  We explicitly made it public in the testing
+    # framework so this example works in both versions of Ruby.  Just
+    # keep in mind you can't call method_missing like that in Ruby
+    # 1.9. normally.
+    #
+    # Thanks.  We now return you to your regularly schedule Ruby
+    # Koans.
   end
 
   # ------------------------------------------------------------------

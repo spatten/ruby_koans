@@ -36,6 +36,10 @@ class Object
       self.send(method)
     end
   end
+
+  in_ruby_version("1.9") do
+    public :method_missing
+  end
 end
 
 module EdgeCase
