@@ -1,4 +1,4 @@
-require 'edgecase'
+require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 class AboutClasses < EdgeCase::Koan
   class Dog
@@ -43,7 +43,7 @@ class AboutClasses < EdgeCase::Koan
     fido = Dog2.new
     fido.set_name("Fido")
 
-    assert_equal __, fido.instance_variable_get("@name")    
+    assert_equal __, fido.instance_variable_get("@name")
   end
 
   def test_you_can_rip_the_value_out_using_instance_eval
@@ -89,7 +89,7 @@ class AboutClasses < EdgeCase::Koan
 
     assert_equal __, fido.name
   end
-  
+
   # ------------------------------------------------------------------
 
   class Dog5
@@ -125,7 +125,7 @@ class AboutClasses < EdgeCase::Koan
     # THINK ABOUT IT:
     # Why is this so?
   end
-  
+
   def test_different_objects_have_difference_instance_variables
     fido = Dog6.new("Fido")
     rover = Dog6.new("Rover")
@@ -186,5 +186,5 @@ class AboutClasses < EdgeCase::Koan
     assert_equal __, "STRING".to_s
     assert_equal __, "STRING".inspect
   end
- 
+
 end

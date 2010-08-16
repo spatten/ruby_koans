@@ -1,4 +1,4 @@
-require 'edgecase'
+require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 class AboutNil < EdgeCase::Koan
   def test_nil_is_an_object

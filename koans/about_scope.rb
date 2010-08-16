@@ -1,4 +1,4 @@
-require 'edgecase'
+require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 class AboutScope < EdgeCase::Koan
   module Jims
@@ -28,7 +28,7 @@ class AboutScope < EdgeCase::Koan
     rover = Joes::Dog.new
     assert_equal __, fido.identify
     assert_equal __, rover.identify
-    
+
     assert_not_equal fido.class, rover.class
     assert_not_equal Jims::Dog, Joes::Dog
   end
@@ -41,7 +41,7 @@ class AboutScope < EdgeCase::Koan
   def test_bare_bones_class_names_assume_the_current_scope
     assert_equal __, AboutScope::String == String
   end
-  
+
   def test_nested_string_is_not_the_same_as_the_system_string
     assert_equal __, String == "HI".class
   end
