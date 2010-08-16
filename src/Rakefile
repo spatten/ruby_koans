@@ -7,6 +7,6 @@ require 'rake/testtask'
 task :default => :test
 
 task :test do
-  ruby '-I.', 'path_to_enlightenment.rb'
+  ruby 'path_to_enlightenment.rb'
 end
 
