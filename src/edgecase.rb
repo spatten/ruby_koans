@@ -51,7 +51,11 @@ module EdgeCase
     end
 
     in_ruby_version("1.9") do
-      AssertionError = MiniTest::Assertion
+      if defined?(MiniTest)
+        AssertionError = MiniTest::Assertion
+      else
+        AssertionError = Test::Unit::AssertionFailedError
+      end
     end
 
     def initialize
