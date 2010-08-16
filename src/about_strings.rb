@@ -141,16 +141,25 @@ EOS
 
   def test_you_can_get_a_single_character_from_a_string
     string = "Bacon, lettuce and tomato"
-    assert_equal __(97), string[1]
+    assert_equal __(97, 'a'), string[1]
 
     # Surprised?
   end
 
-  def test_single_characters_are_represented_by_integers
-    assert_equal __(97), ?a
-    assert_equal __(true), ?a == 97
+  in_ruby_version("1.8") do
+    def test_in_ruby_1_8_single_characters_are_represented_by_integers
+      assert_equal __(97, 'a'), ?a
+      assert_equal __(true, false), ?a == 97
 
-    assert_equal __(true), ?b == (?a + 1)
+      assert_equal __(true), ?b == (?a + 1)
+    end
+  end
+
+  in_ruby_version("1.9") do
+    def test_in_ruby_1_8_single_characters_are_represented_by_strings
+      assert_equal __('a'), ?a
+      assert_equal __(false), ?a == 97
+    end
   end
 
   def test_strings_can_be_split

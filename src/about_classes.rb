@@ -22,7 +22,7 @@ class AboutClasses < EdgeCase::Koan
     assert_equal __([]), fido.instance_variables
 
     fido.set_name("Fido")
-    assert_equal __(["@name"]), fido.instance_variables
+    assert_equal __(["@name"], [:@name]), fido.instance_variables
   end
 
   def test_instance_variables_cannot_be_accessed_outside_the_class
@@ -43,7 +43,7 @@ class AboutClasses < EdgeCase::Koan
     fido = Dog2.new
     fido.set_name("Fido")
 
-    assert_equal __("Fido"), fido.instance_variable_get("@name")    
+    assert_equal __("Fido"), fido.instance_variable_get("@name")
   end
 
   def test_you_can_rip_the_value_out_using_instance_eval
@@ -89,7 +89,7 @@ class AboutClasses < EdgeCase::Koan
 
     assert_equal __("Fido"), fido.name
   end
-  
+
   # ------------------------------------------------------------------
 
   class Dog5
@@ -125,7 +125,7 @@ class AboutClasses < EdgeCase::Koan
     # THINK ABOUT IT:
     # Why is this so?
   end
-  
+
   def test_different_objects_have_difference_instance_variables
     fido = Dog6.new("Fido")
     rover = Dog6.new("Rover")
@@ -180,11 +180,11 @@ class AboutClasses < EdgeCase::Koan
   def test_all_objects_support_to_s_and_inspect
     array = [1,2,3]
 
-    assert_equal __("123"), array.to_s
+    assert_equal __("123", "[1, 2, 3]"), array.to_s
     assert_equal __("[1, 2, 3]"), array.inspect
 
     assert_equal __("STRING"), "STRING".to_s
     assert_equal __('"STRING"'), "STRING".inspect
   end
- 
+
 end

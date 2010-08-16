@@ -28,7 +28,7 @@ class AboutScope < EdgeCase::Koan
     rover = Joes::Dog.new
     assert_equal __(:jims_dog), fido.identify
     assert_equal __(:joes_dog), rover.identify
-    
+
     assert_not_equal fido.class, rover.class
     assert_not_equal Jims::Dog, Joes::Dog
   end
@@ -41,7 +41,7 @@ class AboutScope < EdgeCase::Koan
   def test_bare_bones_class_names_assume_the_current_scope
     assert_equal __(true), AboutScope::String == String
   end
-  
+
   def test_nested_string_is_not_the_same_as_the_system_string
     assert_equal __(false), String == "HI".class
   end
@@ -73,7 +73,7 @@ class AboutScope < EdgeCase::Koan
   end
 
   def test_you_can_get_a_list_of_constants_for_any_class_or_module
-    assert_equal __(["Dog"]), Jims.constants
+    assert_equal __(["Dog"], [:Dog]), Jims.constants
     assert Object.constants.size > _n_(10)
   end
 end

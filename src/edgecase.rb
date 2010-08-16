@@ -6,12 +6,24 @@ require 'test/unit/assertions'
 class FillMeInError < StandardError
 end
 
-def __(value="FILL ME IN")
-  value
+def in_ruby_version(version)
+  yield if RUBY_VERSION =~ /^#{version}/
 end
 
-def _n_(value=999999)
-  value
+def __(value="FILL ME IN", value19=:mu)
+  if RUBY_VERSION < "1.9"
+    value
+  else
+    (value19 == :mu) ? value : value19
+  end
+end
+
+def _n_(value=999999, value19=:mu)
+  if RUBY_VERSION < "1.9"
+    value
+  else
+    (value19 == :mu) ? value : value19
+  end
 end
 
 def ___(value=FillMeInError)
@@ -104,7 +116,7 @@ module EdgeCase
         end
       end
     end
-  end      
+  end
 
   class Koan
     include Test::Unit::Assertions
@@ -181,7 +193,7 @@ module EdgeCase
               load(arg)
             else
               fail "Unknown command line argument '#{arg}'"
-            end              
+            end
           end
         end
       end
