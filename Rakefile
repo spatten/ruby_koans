@@ -21,6 +21,7 @@ module Koans
     line = line.gsub(/\b____\([^\)]+\)/, "____")
     line = line.gsub(/\b___\([^\)]+\)/, "___")
     line = line.gsub(/\b__\([^\)]+\)/, "__")
+    line = line.gsub(/\b_n_\([^\)]+\)/, "_n_")
     line = line.gsub(%r(/\#\{__\}/), "/__/")
     line
   end
