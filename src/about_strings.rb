@@ -156,7 +156,7 @@ EOS
   end
 
   in_ruby_version("1.9") do
-    def test_in_ruby_1_8_single_characters_are_represented_by_strings
+    def test_in_ruby_1_9_single_characters_are_represented_by_strings
       assert_equal __('a'), ?a
       assert_equal __(false), ?a == 97
     end
