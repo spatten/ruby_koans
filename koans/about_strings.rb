@@ -174,8 +174,8 @@ EOS
     assert_equal [__, __, __, __], words
 
     # NOTE: Patterns are formed from Regular Expressions.  Ruby has a
-    # very powerful Regular Expression library.  Unfortunately, time
-    # does not permit us to explore it in detail now.
+    # very powerful Regular Expression library.  We will become
+    # enlightened about them soon.
   end
 
   def test_strings_can_be_joined
