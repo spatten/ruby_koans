@@ -19,11 +19,11 @@ class AboutClassMethods < EdgeCase::Koan
 
   def test_objects_have_methods
     fido = Dog.new
-    assert fido.methods.size > _n_(30)
+    assert fido.methods.size > _n_
   end
 
   def test_classes_have_methods
-    assert Dog.methods.size > _n_(40)
+    assert Dog.methods.size > _n_
   end
 
   def test_you_can_define_methods_on_individual_objects
