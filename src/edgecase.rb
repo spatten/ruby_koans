@@ -47,12 +47,18 @@ module EdgeCase
   module Color
     #shamelessly stolen from redgreen
     COLORS = { :clear => 0, :red => 31, :green => 32, :yellow => 33, :blue => 34, :magenta => 35, :cyan => 36 }
-    def self.method_missing(color_name, *args)
-      color(color_name) + args.first + color(:clear) 
-    end 
-    def self.color(color)
-      "\e[#{COLORS[color.to_sym]}m"
-    end 
+
+    COLORS.each do |color, value|
+      class_eval "def self.#{color}(string); colorize(string, #{value}); end"
+    end
+
+    def self.colorize(string, color_value)
+      color(color_value) + string + color(COLORS[:clear])
+    end
+
+    def self.color(color_value)
+      "\e[#{color_value}m"
+    end
   end
 
   class Sensei
