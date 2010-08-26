@@ -53,7 +53,11 @@ module EdgeCase
     end
 
     def self.colorize(string, color_value)
-      color(color_value) + string + color(COLORS[:clear])
+      if ENV['NO_COLOR']
+        string
+      else
+        color(color_value) + string + color(COLORS[:clear])
+      end
     end
 
     def self.color(color_value)
