@@ -121,7 +121,7 @@ module EdgeCase
         end
         puts
       end
-      puts Color.green(say_something_zenlike)
+      puts Color.green(a_zenlike_statement)
     end
 
     def find_interesting_lines(backtrace)
@@ -132,7 +132,7 @@ module EdgeCase
 
     # Hat's tip to Ara T. Howard for the zen statements from his
     # metakoans Ruby Quiz (http://rubyquiz.com/quiz67.html)
-    def say_something_zenlike
+    def a_zenlike_statement
       puts
       if !failed?
         zen_statement =  "Mountains are again merely mountains"
