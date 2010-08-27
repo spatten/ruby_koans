@@ -46,13 +46,20 @@ module EdgeCase
 
   module Color
     #shamelessly stolen (and modified) from redgreen
-    COLORS = { :clear => 0, :red => 31, :green => 32, :yellow => 33, :blue => 34, :magenta => 35, :cyan => 36 }
+    COLORS = {
+      :clear   => 0,  :black   => 30, :red   => 31,
+      :green   => 32, :yellow  => 33, :blue  => 34,
+      :magenta => 35, :cyan    => 36,
+    }
+
+    module_function
 
     COLORS.each do |color, value|
-      class_eval "def self.#{color}(string); colorize(string, #{value}); end"
+      module_eval "def #{color}(string); colorize(string, #{value}); end"
+      module_function color
     end
 
-    def self.colorize(string, color_value)
+    def colorize(string, color_value)
       if ENV['NO_COLOR']
         string
       else
@@ -60,7 +67,7 @@ module EdgeCase
       end
     end
 
-    def self.color(color_value)
+    def color(color_value)
       "\e[#{color_value}m"
     end
   end
