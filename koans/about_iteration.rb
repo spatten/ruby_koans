@@ -78,16 +78,13 @@ class AboutIteration < EdgeCase::Koan
     assert_equal __, result
 
     # Files act like a collection of lines
-    file = File.open("example_file.txt")
-    upcase_lines = file.map { |line| line.strip.upcase }
+    upcase_lines = File.open("example_file.txt") do |file|
+      file.map { |line| line.strip.upcase }
+    end
     assert_equal __, upcase_lines
 
     # NOTE: You can create your own collections that work with each,
     # map, select, etc.
-  ensure
-    # Arg, this is ugly.
-    # We will figure out how to fix this later.
-    file.close if file
   end
 
 end
