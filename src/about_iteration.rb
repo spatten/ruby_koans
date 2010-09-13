@@ -87,4 +87,17 @@ class AboutIteration < EdgeCase::Koan
     # map, select, etc.
   end
 
+  # Bonus Question:  In the previous koan, we saw the construct:
+  #
+  #   File.open(filename) do |file|
+  #     # code to read 'file'
+  #   end
+  #
+  # Why did we do it that way instead of the following?
+  #
+  #   file = File.open(filename)
+  #   # code to read 'file'
+  #
+  # When you get to the "AboutSandwichCode" koan, recheck your answer.
+
 end
