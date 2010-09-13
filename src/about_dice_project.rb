@@ -7,7 +7,7 @@ class DiceSet
   end
 end
 
-class AboutDiceSet < EdgeCase::Koan
+class AboutDiceProject < EdgeCase::Koan
   def test_can_create_a_dice_set
     dice = DiceSet.new
     assert_not_nil dice
