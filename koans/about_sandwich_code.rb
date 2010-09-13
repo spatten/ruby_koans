@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
-class AboutUsingBlocks < EdgeCase::Koan
+class AboutSandwichCode < EdgeCase::Koan
 
   def count_lines(file_name)
     file = open(file_name)
@@ -86,7 +86,7 @@ class AboutUsingBlocks < EdgeCase::Koan
   def test_finding_lines2
     assert_equal __, find_line2("example_file.txt")
   end
-  
+
   # ------------------------------------------------------------------
 
   def count_lines3(file_name)
