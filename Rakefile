@@ -11,8 +11,9 @@ DIST_DIR     = 'dist'
 SRC_FILES = FileList["#{SRC_DIR}/*"]
 KOAN_FILES = SRC_FILES.pathmap("#{PROB_DIR}/%f")
 
-TAR_FILE = "#{DIST_DIR}/rubykoans.tgz"
-ZIP_FILE = "#{DIST_DIR}/rubykoans.zip"
+today    = Time.now.strftime("%Y-%m-%d")
+TAR_FILE = "#{DIST_DIR}/rubykoans-#{today}.tgz"
+ZIP_FILE = "#{DIST_DIR}/rubykoans-#{today}.zip"
 
 CLOBBER.include(DIST_DIR)
 
