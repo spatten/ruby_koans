@@ -70,7 +70,7 @@ class AboutSymbols < EdgeCase::Koan
   # interesting string operations are available on symbols.
   def test_symbols_cannot_be_concatenated
     # Exceptions will be pondered further father down the path
-    assert_raise(__(NoMethodError)) do
+    assert_raise(___(NoMethodError)) do
       :cats + :dogs
     end
   end
