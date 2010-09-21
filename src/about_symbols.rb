@@ -47,7 +47,7 @@ class AboutSymbols < EdgeCase::Koan
     assert_equal __(:catsAndDogs), string.to_sym
   end
 
-  def test_symbols_with_spaces_can_by_built
+  def test_symbols_with_spaces_can_be_built
     symbol = :"cats and dogs"
 
     assert_equal symbol, __("cats and dogs").to_sym
