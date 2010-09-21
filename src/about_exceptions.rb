@@ -57,4 +57,12 @@ class AboutExceptions < EdgeCase::Koan
     assert_equal __(:always_run), result
   end
 
+  # Sometimes, we must know about the unknown
+  def test_asserting_an_error_is_raised
+    # A do-end is a block, a topic to explore more later
+    assert_raise(___(MySpecialError)) do
+      raise MySpecialError.new("New instances can be raised directly.")
+    end
+  end
+
 end
