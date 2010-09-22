@@ -110,6 +110,8 @@ module EdgeCase
           File.open(PROGRESS_FILE_NAME,'r') do |f|
             @_contents = f.read.to_s.gsub(/\s/,'').split(',')
           end
+        else
+          @_contents = []
         end
       end
       @_contents
