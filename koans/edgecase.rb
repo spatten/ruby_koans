@@ -73,7 +73,7 @@ module EdgeCase
   end
 
   class Sensei
-    attr_reader :failure, :failed_test
+    attr_reader :failure, :failed_test, :pass_count
 
     in_ruby_version("1.8") do
       AssertionError = Test::Unit::AssertionFailedError
@@ -91,16 +91,41 @@ module EdgeCase
       @pass_count = 0
       @failure = nil
       @failed_test = nil
+      @observations = []
     end
 
-    def accumulate(test)
-      if test.passed?
+    PROGRESS_FILE_NAME = '.path_progress'
+
+    def add_progress(prog)
+      @_contents = nil
+      exists = File.exists?(PROGRESS_FILE_NAME)
+      File.open(PROGRESS_FILE_NAME,'a+') do |f|
+        f.print "#{',' if exists}#{prog}"
+      end
+    end
+
+    def progress
+      if @_contents.nil?
+        if File.exists?(PROGRESS_FILE_NAME)
+          File.open(PROGRESS_FILE_NAME,'r') do |f|
+            @_contents = f.read.to_s.gsub(/\s/,'').split(',')
+          end
+        end
+      end
+      @_contents
+    end
+
+    def observe(step)
+      if step.passed?
         @pass_count += 1
-        puts Color.green("  #{test.name} has expanded your awareness.")
+        if @pass_count > progress.last.to_i
+          @observations << Color.green("#{step.koan_file}##{step.name} has expanded your awareness.")
+        end
       else
-        puts Color.red("  #{test.name} has damaged your karma.")
-        @failed_test = test
-        @failure = test.failure
+        @failed_test = step
+        @failure = step.failure
+        add_progress(@pass_count)
+        @observations << Color.red("#{step.koan_file}##{step.name} has damaged your karma.")
         throw :edgecase_exit
       end
     end
@@ -113,22 +138,115 @@ module EdgeCase
       failure.is_a?(AssertionError)
     end
 
-    def report
+    def instruct
       if failed?
-        puts
-        puts Color.green("You have not yet reached enlightenment ...")
-        puts Color.red(failure.message)
-        puts
-        puts Color.green("Please meditate on the following code:")
-        if assert_failed?
-          #puts find_interesting_lines(failure.backtrace)
-          puts find_interesting_lines(failure.backtrace).collect {|l| Color.red(l) }
-        else
-          puts Color.red(failure.backtrace)
-        end
-        puts
+        @observations.each{|c| puts c }
+        encourage
+        guide_through_error
+        a_zenlike_statement
+        show_progress
+      else
+        end_screen
       end
-      puts Color.green(a_zenlike_statement)
+    end
+
+    def show_progress
+      bar_width = 50
+      total_tests = EdgeCase::Koan.total_tests
+      scale = bar_width.to_f/total_tests
+      print Color.green("your path thus far [")
+      happy_steps = (pass_count*scale).to_i
+      happy_steps = 1 if happy_steps == 0 && pass_count > 0
+      print Color.green('.'*happy_steps)
+      if failed?
+        print Color.red('X')
+        print Color.blue('_'*(bar_width-1-happy_steps))
+      end
+      print Color.green(']')
+      print " #{pass_count}/#{total_tests}"
+      puts
+    end
+
+    def end_screen
+        completed = <<-ENDTEXT
+                                   ,,   ,  ,,                                   
+                                  :      ::::,    :::,                             
+                    ,         ,,: :::::::::::::,,  ::::    :  ,                  
+                  ,       ,,,    ,:::::::::::::::::::,  ,:   ,: ,,               
+             :,        ::,   , , :, ,:::::::::::::::::::, :::  ,::::             
+            :   :     ::,                          ,:::::::: ::, ,::::            
+           ,     ,:::::                                   :,:::::::,::::,        
+       ,:     , ,:,,:                                         :::::::::::::       
+      ::,:   ,,:::,                                            ,::::::::::::,     
+     ,:::, :,,:::                                                ::::::::::::,    
+    ,::: :::::::,       Mountains are again merely mountains      ,::::::::::::    
+    :::,,,::::::                                                    ::::::::::::    
+  ,:::::::::::,                                                     ::::::::::::,   
+  :::::::::::,                                                      ,::::::::::::   
+ :::::::::::::                                                      ,::::::::::::   
+,::::::::::::                       Ruby Koans                       ::::::::::::,   
+:::::::::::::                                                       ,::::::::::::,  
+,:::::::::::,                                                       , ::::::::::::   
+ ,:::::::::::::,                brought to you by                  ,,::::::::::::,  
+ ::::::::::::::                                                     ,::::::::::::   
+  ::::::::::::::,                                                   :::::::::::::   
+  ::::::::::::,             EdgeCase Software Artisans            , ::::::::::::   
+   :,::::::::: ::::                                               :::::::::::::    
+    ,:::::::::::  ,:                                          ,,:::::::::::::,    
+      ::::::::::::                                           ,::::::::::::::,     
+       :::::::::::::::::,                                  ::::::::::::::::       
+        :::::::::::::::::::,                             ::::::::::::::::       
+         ::::::::::::::::::::::,                     ,::::,:, , ::::,:::         
+           :::::::::::::::::::::::,               ::,: ::,::, ,,: ::::           
+               ,::::::::::::::::::::              ::,,  , ,,  ,::::              
+                  ,::::::::::::::::              ::,, ,   ,:::,                 
+                       ,::::                         , ,,                       
+                                                   ,,,                          
+ENDTEXT
+        puts completed
+    end
+
+    def encourage
+      puts
+      puts "The Master says:"
+      puts Color.blue("  You have not yet reached enlightenment.")
+      if ((recents = progress.last(5)) && recents.size == 5 && recents.uniq.size == 1)
+        puts Color.blue("  I sense frustration. Do not be afraid to ask for help.")
+      elsif progress.last(2).size == 2 && progress.last(2).uniq.size == 1
+        puts Color.blue("  Do not lose hope.")
+      elsif progress.last.to_i > 0
+        puts Color.blue("  You are progressing. Excellent. #{progress.last} completed.")
+      end
+    end
+
+    def guide_through_error
+      puts
+      puts "The answers you seek..."
+      puts Color.red(indent(failure.message).join)
+      puts
+      puts "Please meditate on the following code:"
+      if assert_failed?
+        puts embolden_first_line_only(indent(find_interesting_lines(failure.backtrace)))
+      else
+        puts embolden_first_line_only(indent(failure.backtrace))
+      end
+      puts
+    end
+
+    def embolden_first_line_only(text)
+      first_line = true
+      text.collect { |t|
+        if first_line
+          first_line = false
+          Color.red(t)
+        else
+          Color.blue(t)
+        end
+      }
+    end
+
+    def indent(text)
+      text.collect{|t| "  #{t}"}
     end
 
     def find_interesting_lines(backtrace)
@@ -140,7 +258,6 @@ module EdgeCase
     # Hat's tip to Ara T. Howard for the zen statements from his
     # metakoans Ruby Quiz (http://rubyquiz.com/quiz67.html)
     def a_zenlike_statement
-      puts
       if !failed?
         zen_statement =  "Mountains are again merely mountains"
       else
@@ -159,18 +276,21 @@ module EdgeCase
           "things are not what they appear to be: nor are they otherwise"
         end
       end
-      zen_statement
+      puts Color.green(zen_statement)
     end
   end
 
   class Koan
     include Test::Unit::Assertions
 
-    attr_reader :name, :failure
+    attr_reader :name, :failure, :koan_count, :step_count, :koan_file
 
-    def initialize(name)
+    def initialize(name, koan_file=nil, koan_count=0, step_count=0)
       @name = name
       @failure = nil
+      @koan_count = koan_count
+      @step_count = step_count
+      @koan_file = koan_file
     end
 
     def passed?
@@ -187,6 +307,22 @@ module EdgeCase
     def teardown
     end
 
+    def meditate
+      setup
+      begin
+        send(name)
+      rescue StandardError, EdgeCase::Sensei::AssertionError => ex
+        failed(ex)
+      ensure
+        begin
+          teardown
+        rescue StandardError, EdgeCase::Sensei::AssertionError => ex
+          failed(ex) if passed?
+        end
+      end
+      self
+    end
+
     # Class methods for the EdgeCase test suite.
     class << self
       def inherited(subclass)
@@ -194,32 +330,7 @@ module EdgeCase
       end
 
       def method_added(name)
-        testmethods << name unless tests_disabled?
-      end
-
-      def run_tests(accumulator)
-        puts
-        puts Color.green("Thinking #{self}")
-        testmethods.each do |m|
-          self.run_test(m, accumulator) if Koan.test_pattern =~ m.to_s
-        end
-      end
-
-      def run_test(method, accumulator)
-        test = self.new(method)
-        test.setup
-        begin
-          test.send(method)
-        rescue StandardError, EdgeCase::Sensei::AssertionError => ex
-          test.failed(ex)
-        ensure
-          begin
-            test.teardown
-          rescue StandardError, EdgeCase::Sensei::AssertionError => ex
-            test.failed(ex) if test.passed?
-          end
-        end
-        accumulator.accumulate(test)
+        testmethods << name if !tests_disabled? && Koan.test_pattern =~ name.to_s
       end
 
       def end_of_enlightenment
@@ -261,17 +372,36 @@ module EdgeCase
         @test_pattern ||= /^test_/
       end
 
+      def total_tests
+        self.subclasses.inject(0){|total, k| total + k.testmethods.size }
+      end
+    end
+  end
+
+  class ThePath
+    def walk
+      sensei = EdgeCase::Sensei.new
+      each_step do |step|
+        sensei.observe(step.meditate)
+      end
+      sensei.instruct
+    end
+
+    def each_step
+      catch(:edgecase_exit) {
+        step_count = 0
+        EdgeCase::Koan.subclasses.each_with_index do |koan,koan_index|
+          koan.testmethods.each do |method_name|
+            step = koan.new(method_name, koan.to_s, koan_index+1, step_count+=1)
+            yield step
+          end
+        end
+      }
     end
   end
 end
 
 END {
   EdgeCase::Koan.command_line(ARGV)
-  zen_master = EdgeCase::Sensei.new
-  catch(:edgecase_exit) {
-    EdgeCase::Koan.subclasses.each do |sc|
-      sc.run_tests(zen_master)
-    end
-  }
-  zen_master.report
+  EdgeCase::ThePath.new.walk
 }
