@@ -162,7 +162,7 @@ module EdgeCase
       print Color.green('.'*happy_steps)
       if failed?
         print Color.red('X')
-        print Color.blue('_'*(bar_width-1-happy_steps))
+        print Color.cyan('_'*(bar_width-1-happy_steps))
       end
       print Color.green(']')
       print " #{pass_count}/#{total_tests}"
@@ -211,13 +211,13 @@ ENDTEXT
     def encourage
       puts
       puts "The Master says:"
-      puts Color.blue("  You have not yet reached enlightenment.")
+      puts Color.cyan("  You have not yet reached enlightenment.")
       if ((recents = progress.last(5)) && recents.size == 5 && recents.uniq.size == 1)
-        puts Color.blue("  I sense frustration. Do not be afraid to ask for help.")
+        puts Color.cyan("  I sense frustration. Do not be afraid to ask for help.")
       elsif progress.last(2).size == 2 && progress.last(2).uniq.size == 1
-        puts Color.blue("  Do not lose hope.")
+        puts Color.cyan("  Do not lose hope.")
       elsif progress.last.to_i > 0
-        puts Color.blue("  You are progressing. Excellent. #{progress.last} completed.")
+        puts Color.cyan("  You are progressing. Excellent. #{progress.last} completed.")
       end
     end
 
@@ -242,7 +242,7 @@ ENDTEXT
           first_line = false
           Color.red(t)
         else
-          Color.blue(t)
+          Color.cyan(t)
         end
       }
     end
