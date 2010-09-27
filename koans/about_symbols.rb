@@ -25,15 +25,21 @@ class AboutSymbols < EdgeCase::Koan
 
   def test_method_names_become_symbols
     all_symbols = Symbol.all_symbols
-
-    assert_equal __, all_symbols.include?(:test_method_names_are_symbols)
+    assert_equal __, all_symbols.include?(:test_method_names_become_symbols)
   end
 
-  RubyConstant = "What is the sound of one hand clapping?"
-  def test_constants_become_symbols
-    all_symbols = Symbol.all_symbols
+  # THINK ABOUT IT:
+  #
+  # Why do we capture the list of symbols before we check for the
+  # method name?
 
-    assert_equal true, all_symbols.include?(__)
+  in_ruby_version("mri") do
+    RubyConstant = "What is the sound of one hand clapping?"
+    def test_constants_become_symbols
+      all_symbols = Symbol.all_symbols
+
+      assert_equal __, all_symbols.include?(__)
+    end
   end
 
   def test_symbols_can_be_made_from_strings
@@ -43,6 +49,13 @@ class AboutSymbols < EdgeCase::Koan
 
   def test_symbols_with_spaces_can_be_built
     symbol = :"cats and dogs"
+
+    assert_equal symbol, __.to_sym
+  end
+
+  def test_symbols_with_spaces_can_be_built
+    value = "and"
+    symbol = :"cats #{value} dogs"
 
     assert_equal symbol, __.to_sym
   end
@@ -65,13 +78,23 @@ class AboutSymbols < EdgeCase::Koan
     assert_equal __, symbol.respond_to?(:each_char)
     assert_equal __, symbol.respond_to?(:reverse)
   end
+
   # It's important to realize that symbols are not "immutable
   # strings", though they are immutable. None of the
   # interesting string operations are available on symbols.
+
   def test_symbols_cannot_be_concatenated
     # Exceptions will be pondered further father down the path
     assert_raise(___) do
       :cats + :dogs
     end
   end
+
+  def test_symbols_can_be_dynamically_created
+    assert_equal __, ("cats" + "dogs").to_sym
+  end
+
+  # THINK ABOUT IT:
+  #
+  # Why is it not a good idea to dynamically create a lot of symbols?
 end

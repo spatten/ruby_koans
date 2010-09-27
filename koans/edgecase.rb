@@ -6,8 +6,14 @@ require 'test/unit/assertions'
 class FillMeInError < StandardError
 end
 
-def in_ruby_version(version)
-  yield if RUBY_VERSION =~ /^#{version}/
+def ruby_version?(version)
+  RUBY_VERSION =~ /^#{version}/ ||
+    (version == 'jruby' && defined?(JRUBY_VERSION)) ||
+    (version == 'mri' && ! defined?(JRUBY_VERSION))
+end
+
+def in_ruby_version(*versions)
+  yield if versions.any? { |v| ruby_version?(v) }
 end
 
 def __(value="FILL ME IN", value19=:mu)
@@ -248,6 +254,7 @@ ENDTEXT
     end
 
     def indent(text)
+      text = text.split(/\n/) if text.is_a?(String)
       text.collect{|t| "  #{t}"}
     end
 
