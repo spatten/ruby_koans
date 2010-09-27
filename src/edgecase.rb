@@ -57,6 +57,19 @@ class Object
   end
 end
 
+class String
+  def side_padding(width)
+    extra = width - self.size
+    if width < 0
+      self
+    else
+      left_padding = extra / 2
+      right_padding = (extra+1)/2
+      (" " * left_padding) + self + (" " *right_padding)
+    end
+  end
+end
+
 module EdgeCase
   class << self
     def simple_output
@@ -202,6 +215,9 @@ module EdgeCase
     end
 
     def artistic_end_screen
+      "JRuby 1.9.x Koans"
+      ruby_version = "(in #{'J' if defined?(JRUBY_VERSION)}Ruby #{defined?(JRUBY_VERSION) ? JRUBY_VERSION : RUBY_VERSION})"
+      ruby_version = ruby_version.side_padding(54)
         completed = <<-ENDTEXT
                                   ,,   ,  ,,
                                 :      ::::,    :::,
@@ -218,8 +234,8 @@ module EdgeCase
  ,:::::::::::,                                                    ::::::::::::,
  :::::::::::,                                                     ,::::::::::::
 :::::::::::::                                                     ,::::::::::::
-::::::::::::                       Ruby Koans                      ::::::::::::,
-::::::::::::                                                      ,::::::::::::,
+::::::::::::                      Ruby Koans                       ::::::::::::,
+::::::::::::#{                  ruby_version                     },::::::::::::,
 :::::::::::,                                                      , ::::::::::::
 ,:::::::::::::,                brought to you by                 ,,::::::::::::,
 ::::::::::::::                                                    ,::::::::::::
