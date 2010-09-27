@@ -182,4 +182,12 @@ EOS
     words = ["Now", "is", "the", "time"]
     assert_equal __("Now is the time"), words.join(" ")
   end
+
+  def test_strings_are_not_unique_objects
+    a = "a string"
+    b = "a string"
+
+    assert_equal __(true), a           == b
+    assert_equal __(false), a.object_id == b.object_id
+  end
 end

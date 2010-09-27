@@ -19,8 +19,8 @@ class AboutSymbols < EdgeCase::Koan
     symbol1 = :a_symbol
     symbol2 = :a_symbol
 
-    assert symbol1.equal?(__)
-    assert_equal __, symbol2.object_id
+    assert_equal __, symbol1           == symbol2
+    assert_equal __, symbol1.object_id == symbol2.object_id
   end
 
   def test_method_names_become_symbols
