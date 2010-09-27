@@ -75,7 +75,17 @@ class AboutJavaInterop < EdgeCase::Koan
     assert_equal __(true), java_string == ruby_string
 
     # THINK ABOUT IT:
+    #
     # Is there any possible way for this to be more wrong?
+    #
+    # SERIOUSLY, THINK ABOUT IT:
+    #
+    # Why do you suppose that Ruby and Java strings compare like that?
+    #
+    # ADVANCED THINK ABOUT IT:
+    #
+    # Is there a way to make Ruby/Java string comparisons commutative?
+    # How would you do it?
   end
 
   def test_however_most_methods_returning_strings_return_ruby_strings
@@ -84,6 +94,5 @@ class AboutJavaInterop < EdgeCase::Koan
     assert_equal __(true), java_array.toString.is_a?(String)
     assert_equal __(false), java_array.toString.is_a?(java.lang.String)
   end
-
 
 end
