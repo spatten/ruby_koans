@@ -58,6 +58,11 @@ class Object
 end
 
 module EdgeCase
+  class << self
+    def simple_output
+      ENV['SIMPLE_KOAN_OUTPUT'] == 'true'
+    end
+  end
 
   module Color
     #shamelessly stolen (and modified) from redgreen
@@ -185,6 +190,18 @@ module EdgeCase
     end
 
     def end_screen
+      if EdgeCase.simple_output
+        boring_end_screen
+      else
+        artistic_end_screen
+      end
+    end
+
+    def boring_end_screen
+      puts "Mountains are again merely mountains"
+    end
+
+    def artistic_end_screen
         completed = <<-ENDTEXT
                                   ,,   ,  ,,
                                 :      ::::,    :::,
