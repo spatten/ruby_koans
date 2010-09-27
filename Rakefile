@@ -18,12 +18,17 @@ ZIP_FILE = "#{DIST_DIR}/rubykoans-#{today}.zip"
 CLOBBER.include(DIST_DIR)
 
 module Koans
+  # Remove solution info from source
+  #   __(a,b)     => __
+  #   _n_(number) => __
+  #   # __        =>
   def Koans.remove_solution(line)
     line = line.gsub(/\b____\([^\)]+\)/, "____")
     line = line.gsub(/\b___\([^\)]+\)/, "___")
     line = line.gsub(/\b__\([^\)]+\)/, "__")
     line = line.gsub(/\b_n_\([^\)]+\)/, "_n_")
     line = line.gsub(%r(/\#\{__\}/), "/__/")
+    line = line.gsub(/\s*#\s*__\s*$/, '')
     line
   end
 
@@ -82,14 +87,6 @@ desc "Upload the package files to the web server"
 task :upload => [TAR_FILE, ZIP_FILE] do
   sh "scp #{TAR_FILE} linode:sites/onestepback.org/download"
   sh "scp #{ZIP_FILE} linode:sites/onestepback.org/download"
-end
-
-desc "Check that the require files match the about_* files"
-task :check do
-  about_files = Dir['src/about_*.rb'].size
-  about_requires = `grep require src/path_to_enlightenment.rb | wc -l`.to_i
-  puts "# of about files:    #{about_files}"
-  puts "# of about requires: #{about_requires}"
 end
 
 desc "Generate the Koans from the source files from scratch."

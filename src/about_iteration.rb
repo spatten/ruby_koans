@@ -12,7 +12,7 @@ class AboutIteration < EdgeCase::Koan
     array.each do |item|
       sum += item
     end
-    assert_equal 6, sum
+    assert_equal __(6), sum
   end
 
   def test_each_can_use_curly_brace_blocks_too

@@ -3,6 +3,10 @@
 
 require 'test/unit/assertions'
 
+# --------------------------------------------------------------------
+# Support code for the Ruby Koans.
+# --------------------------------------------------------------------
+
 class FillMeInError < StandardError
 end
 
@@ -16,6 +20,8 @@ def in_ruby_version(*versions)
   yield if versions.any? { |v| ruby_version?(v) }
 end
 
+# Standard, generic replacement value.
+# If value19 is given, it is used inplace of value for Ruby 1.9.
 def __(value="FILL ME IN", value19=:mu)
   if RUBY_VERSION < "1.9"
     value
@@ -24,6 +30,7 @@ def __(value="FILL ME IN", value19=:mu)
   end
 end
 
+# Numeric replacement value.
 def _n_(value=999999, value19=:mu)
   if RUBY_VERSION < "1.9"
     value
@@ -32,10 +39,12 @@ def _n_(value=999999, value19=:mu)
   end
 end
 
+# Error object replacement value.
 def ___(value=FillMeInError)
   value
 end
 
+# Method name replacement.
 class Object
   def ____(method=nil)
     if method

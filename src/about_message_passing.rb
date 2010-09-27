@@ -11,19 +11,19 @@ class AboutMessagePassing < EdgeCase::Koan
   def test_methods_can_be_called_directly
     mc = MessageCatcher.new
 
-    assert mc.caught?
+    assert mc.caught?           # __
   end
 
   def test_methods_can_be_invoked_by_sending_the_message
     mc = MessageCatcher.new
 
-    assert mc.send(:caught?)
+    assert mc.send(:caught?)    # __
   end
 
   def test_methods_can_be_invoked_more_dynamically
     mc = MessageCatcher.new
 
-    assert mc.send("caught?")
+    assert mc.send("caught?")   # __
     assert mc.send("caught" + __("?") )    # What do you need to add to the first string?
     assert mc.send("CAUGHT?".____(:downcase) )      # What would you need to do to the string?
   end
@@ -74,7 +74,7 @@ class AboutMessagePassing < EdgeCase::Koan
     exception = assert_raise(___(NoMethodError)) do
       typical.foobar
     end
-    assert_match(/foobar/, exception.message)
+    assert_match(/foobar/, exception.message) # __
   end
 
   def test_calling_method_missing_causes_the_no_method_error
@@ -83,7 +83,7 @@ class AboutMessagePassing < EdgeCase::Koan
     exception = assert_raise(___(NoMethodError)) do
       typical.method_missing(:foobar)
     end
-    assert_match(/foobar/, exception.message)
+    assert_match(/foobar/, exception.message) # __
 
     # THINK ABOUT IT:
     #
@@ -122,7 +122,7 @@ class AboutMessagePassing < EdgeCase::Koan
   def test_catching_messages_makes_respond_to_lie
     catcher = AllMessageCatcher.new
 
-    assert_nothing_raised(NoMethodError) do
+    assert_nothing_raised(NoMethodError) do # __
       catcher.any_method
     end
     assert_equal __(false), catcher.respond_to?(:any_method)

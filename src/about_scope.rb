@@ -29,8 +29,8 @@ class AboutScope < EdgeCase::Koan
     assert_equal __(:jims_dog), fido.identify
     assert_equal __(:joes_dog), rover.identify
 
-    assert_not_equal fido.class, rover.class
-    assert_not_equal Jims::Dog, Joes::Dog
+    assert_equal __(true), fido.class != rover.class
+    assert_equal __(true), Jims::Dog != Joes::Dog
   end
 
   # ------------------------------------------------------------------

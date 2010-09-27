@@ -3,16 +3,16 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 class AboutArrays < EdgeCase::Koan
   def test_creating_arrays
     empty_array = Array.new
-    assert_equal Array, empty_array.class
+    assert_equal __(Array), empty_array.class
     assert_equal __(0), empty_array.size
   end
 
   def test_array_literals
     array = Array.new
-    assert_equal [], array
+    assert_equal [], array # __
 
     array[0] = 1
-    assert_equal [1], array
+    assert_equal [1], array     # __
 
     array[1] = 2
     assert_equal [1, __(2)], array
@@ -45,9 +45,9 @@ class AboutArrays < EdgeCase::Koan
   end
 
   def test_arrays_and_ranges
-    assert_equal Range, (1..5).class
-    assert_not_equal [1,2,3,4,5], (1..5)
-    assert_equal [1,2,3,4,5], (1..5).to_a
+    assert_equal __(Range), (1..5).class
+    assert_not_equal [1,2,3,4,5], (1..5) # __
+    assert_equal __([1,2,3,4,5]), (1..5).to_a
     assert_equal __([1,2,3,4]), (1...5).to_a
   end
 

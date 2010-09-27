@@ -3,11 +3,11 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 class AboutRegularExpressions < EdgeCase::Koan
   def test_a_pattern_is_a_regular_expression
-    assert_equal Regexp, /pattern/.class
+    assert_equal __(Regexp), /pattern/.class
   end
 
   def test_a_regexp_can_search_a_string_for_matching_content
-    assert_equal "match", "some matching content"[/match/]
+    assert_equal __("match"), "some matching content"[/match/]
   end
 
   def test_a_failed_match_returns_nil

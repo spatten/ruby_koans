@@ -19,10 +19,10 @@ class AboutMethods < EdgeCase::Koan
   # considered to be syntactically invalid).
   def test_sometimes_missing_parentheses_are_ambiguous
     #--
-    eval "assert_equal 5, my_global_method(2, 3)" # REMOVE CHECK
+    eval "assert_equal 5, my_global_method(2, 3)" # REMOVE CHECK # __
     if false
       #++
-    eval "assert_equal 5, my_global_method 2, 3" # ENABLE CHECK
+    eval "assert_equal 5, my_global_method 2, 3" # ENABLE CHECK # __
       #--
     end
     #++
