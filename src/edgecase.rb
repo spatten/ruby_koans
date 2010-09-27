@@ -286,7 +286,7 @@ ENDTEXT
 
     def find_interesting_lines(backtrace)
       backtrace.reject { |line|
-        line =~ /test\/unit\/|edgecase\.rb/
+        line =~ /test\/unit\/|edgecase\.rb|minitest/
       }
     end
 
