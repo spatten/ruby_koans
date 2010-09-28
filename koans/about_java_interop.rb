@@ -95,4 +95,30 @@ class AboutJavaInterop < EdgeCase::Koan
     assert_equal __, java_array.toString.is_a?(java.lang.String)
   end
 
+  def test_java_collections_are_enumerable
+    java_array = java.util.ArrayList.new
+    java_array << "one" << "two" << "three"
+    assert_equal __, java_array.map { |item| item.upcase }
+  end
+
+  # ------------------------------------------------------------------
+
+  # Open the Java ArrayList class and add a new method.
+  class Java::JavaUtil::ArrayList
+    def multiply_all
+      result = 1
+      each do |item|
+        result *= item
+      end
+      result
+    end
+  end
+
+  def test_java_class_are_open_from_ruby
+    java_array = java.util.ArrayList.new
+    java_array.add_all([1,2,3,4,5])
+
+    assert_equal __, java_array.multiply_all
+  end
+
 end
