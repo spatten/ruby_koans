@@ -3,6 +3,10 @@
 
 require 'test/unit/assertions'
 
+# --------------------------------------------------------------------
+# Support code for the Ruby Koans.
+# --------------------------------------------------------------------
+
 class FillMeInError < StandardError
 end
 
@@ -16,6 +20,8 @@ def in_ruby_version(*versions)
   yield if versions.any? { |v| ruby_version?(v) }
 end
 
+# Standard, generic replacement value.
+# If value19 is given, it is used inplace of value for Ruby 1.9.
 def __(value="FILL ME IN", value19=:mu)
   if RUBY_VERSION < "1.9"
     value
@@ -24,6 +30,7 @@ def __(value="FILL ME IN", value19=:mu)
   end
 end
 
+# Numeric replacement value.
 def _n_(value=999999, value19=:mu)
   if RUBY_VERSION < "1.9"
     value
@@ -32,10 +39,12 @@ def _n_(value=999999, value19=:mu)
   end
 end
 
+# Error object replacement value.
 def ___(value=FillMeInError)
   value
 end
 
+# Method name replacement.
 class Object
   def ____(method=nil)
     if method
@@ -48,7 +57,25 @@ class Object
   end
 end
 
+class String
+  def side_padding(width)
+    extra = width - self.size
+    if width < 0
+      self
+    else
+      left_padding = extra / 2
+      right_padding = (extra+1)/2
+      (" " * left_padding) + self + (" " *right_padding)
+    end
+  end
+end
+
 module EdgeCase
+  class << self
+    def simple_output
+      ENV['SIMPLE_KOAN_OUTPUT'] == 'true'
+    end
+  end
 
   module Color
     #shamelessly stolen (and modified) from redgreen
@@ -176,6 +203,21 @@ module EdgeCase
     end
 
     def end_screen
+      if EdgeCase.simple_output
+        boring_end_screen
+      else
+        artistic_end_screen
+      end
+    end
+
+    def boring_end_screen
+      puts "Mountains are again merely mountains"
+    end
+
+    def artistic_end_screen
+      "JRuby 1.9.x Koans"
+      ruby_version = "(in #{'J' if defined?(JRUBY_VERSION)}Ruby #{defined?(JRUBY_VERSION) ? JRUBY_VERSION : RUBY_VERSION})"
+      ruby_version = ruby_version.side_padding(54)
         completed = <<-ENDTEXT
                                   ,,   ,  ,,
                                 :      ::::,    :::,
@@ -192,8 +234,8 @@ module EdgeCase
  ,:::::::::::,                                                    ::::::::::::,
  :::::::::::,                                                     ,::::::::::::
 :::::::::::::                                                     ,::::::::::::
-::::::::::::                       Ruby Koans                      ::::::::::::,
-::::::::::::                                                      ,::::::::::::,
+::::::::::::                      Ruby Koans                       ::::::::::::,
+::::::::::::#{                  ruby_version                     },::::::::::::,
 :::::::::::,                                                      , ::::::::::::
 ,:::::::::::::,                brought to you by                 ,,::::::::::::,
 ::::::::::::::                                                    ,::::::::::::
@@ -260,7 +302,7 @@ ENDTEXT
 
     def find_interesting_lines(backtrace)
       backtrace.reject { |line|
-        line =~ /test\/unit\/|edgecase\.rb/
+        line =~ /test\/unit\/|edgecase\.rb|minitest/
       }
     end
 

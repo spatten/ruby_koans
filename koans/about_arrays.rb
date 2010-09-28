@@ -45,9 +45,9 @@ class AboutArrays < EdgeCase::Koan
   end
 
   def test_arrays_and_ranges
-    assert_equal Range, (1..5).class
+    assert_equal __, (1..5).class
     assert_not_equal [1,2,3,4,5], (1..5)
-    assert_equal [1,2,3,4,5], (1..5).to_a
+    assert_equal __, (1..5).to_a
     assert_equal __, (1...5).to_a
   end
 
