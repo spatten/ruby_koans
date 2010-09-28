@@ -15,6 +15,7 @@ namespace "check" do
     puts
   end
 
+  desc "Check that asserts have __ replacements"
   task :asserts do
     puts "Checking for asserts missing the replacement text:"
     begin
@@ -28,4 +29,5 @@ namespace "check" do
   end
 end
 
+desc "Run some simple consistancy checks"
 task :check => ["check:abouts", "check:asserts"]
