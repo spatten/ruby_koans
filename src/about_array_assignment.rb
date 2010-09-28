@@ -20,8 +20,8 @@ class AboutArrayAssignment < EdgeCase::Koan
 
   def test_parallel_assignments_with_splat_operator
     first_name, *last_name = ["John", "Smith", "III"]
-    assert_equal "John", first_name
-    assert_equal ["Smith","III"], last_name
+    assert_equal __("John"), first_name
+    assert_equal __(["Smith","III"]), last_name
   end
 
   def test_parallel_assignments_with_too_few_variables
