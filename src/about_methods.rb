@@ -43,12 +43,15 @@ class AboutMethods < EdgeCase::Koan
     exception = assert_raise(___(ArgumentError)) do
       my_global_method
     end
-    assert_match(/#{__("wrong (number|#) of arguments")}/, exception.message)
+    #--
+    pattern = "wrong (number|#) of arguments"
+    #++
+    assert_match(/#{__(pattern)}/, exception.message)
 
     exception = assert_raise(___(ArgumentError)) do
       my_global_method(1,2,3)
     end
-    assert_match(/#{__("wrong (number|#) of arguments")}/, exception.message)
+    assert_match(/#{__(pattern)}/, exception.message)
   end
 
   # ------------------------------------------------------------------

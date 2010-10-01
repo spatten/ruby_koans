@@ -36,12 +36,12 @@ class AboutMethods < EdgeCase::Koan
     exception = assert_raise(___) do
       my_global_method
     end
-    assert_match(/#{__ of arguments")}/, exception.message)
+    assert_match(/__/, exception.message)
 
     exception = assert_raise(___) do
       my_global_method(1,2,3)
     end
-    assert_match(/#{__ of arguments")}/, exception.message)
+    assert_match(/__/, exception.message)
   end
 
   # ------------------------------------------------------------------
