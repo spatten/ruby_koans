@@ -53,7 +53,7 @@ class AboutSymbols < EdgeCase::Koan
     assert_equal symbol, __.to_sym
   end
 
-  def test_symbols_with_spaces_can_be_built
+  def test_symbols_with_interpolation_can_be_built
     value = "and"
     symbol = :"cats #{value} dogs"
 
