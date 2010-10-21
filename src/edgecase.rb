@@ -93,15 +93,28 @@ module EdgeCase
     end
 
     def colorize(string, color_value)
-      if ENV['NO_COLOR']
-        string
-      else
+      if use_colors?
         color(color_value) + string + color(COLORS[:clear])
+      else
+        string
       end
     end
 
     def color(color_value)
       "\e[#{color_value}m"
+    end
+
+    def use_colors?
+      return false if ENV['NO_COLOR']
+      if ENV['ANSI_COLOR'].nil?
+        ! using_windows?
+      else
+        ENV['ANSI_COLOR'] =~ /^(t|y)/i
+      end
+    end
+
+    def using_windows?
+      File::ALT_SEPARATOR
     end
   end
 
