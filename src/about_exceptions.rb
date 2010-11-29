@@ -22,8 +22,8 @@ class AboutExceptions < EdgeCase::Koan
 
     assert_equal __(:exception_handled), result
 
-    assert ex.is_a?(___(StandardError)), "Failure message."
-    assert ex.is_a?(___(RuntimeError)), "Failure message."
+    assert_equal __(true), ex.is_a?(StandardError), "Should be a Standard Error"
+    assert_equal __(true), ex.is_a?(RuntimeError),  "Should be a Runtime Error"
 
     assert RuntimeError.ancestors.include?(StandardError), # __
       "RuntimeError is a subclass of StandardError"
