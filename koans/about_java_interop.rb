@@ -102,7 +102,7 @@ class AboutJavaInterop < EdgeCase::Koan
     assert_equal __, false.to_java.class
   end
 
-  def test_some_ruby_objects_can_NOT_be_coerced_to_java
+  def test_some_ruby_objects_are_not_coerced_to_what_you_might_expect
     assert_equal __, [].to_java.class == Java::JavaUtil::ArrayList
     assert_equal __, {}.to_java.class == Java::JavaUtil::HashMap
     assert_equal __, Object.new.to_java.class == Java::JavaLang::Object
