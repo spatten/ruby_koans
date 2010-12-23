@@ -95,6 +95,19 @@ class AboutJavaInterop < EdgeCase::Koan
     assert_equal __, java_array.toString.is_a?(java.lang.String)
   end
 
+  def test_some_ruby_objects_can_be_coerced_to_java
+    assert_equal __, "ruby string".to_java.class
+    assert_equal __, 1.to_java.class
+    assert_equal __, 9.32.to_java.class
+    assert_equal __, false.to_java.class
+  end
+
+  def test_some_ruby_objects_can_NOT_be_coerced_to_java
+    assert_equal __, [].to_java.class == Java::JavaUtil::ArrayList
+    assert_equal __, {}.to_java.class == Java::JavaUtil::HashMap
+    assert_equal __, Object.new.to_java.class == Java::JavaLang::Object
+  end
+
   def test_java_collections_are_enumerable
     java_array = java.util.ArrayList.new
     java_array << "one" << "two" << "three"

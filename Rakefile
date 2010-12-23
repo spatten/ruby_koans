@@ -57,6 +57,28 @@ module Koans
   end
 end
 
+module RubyImpls
+  # Calculate the list of relevant Ruby implementations.
+  def self.find_ruby_impls
+    rubys = `rvm list`.gsub(/=>/,'').split(/\n/).sort
+    expected.map { |impl|
+      puts "DBG: impl=#{impl.inspect}"
+      last = rubys.grep(Regexp.new(Regexp.quote(impl))).last
+      last ? last.split.first : nil
+    }.compact
+  end
+
+  # Return a (cached) list of relevant Ruby implementations.
+  def self.list
+    @list ||= find_ruby_impls
+  end
+
+  # List of expected ruby implementations.
+  def self.expected
+    %w(ruby-1.8.6 ruby-1.8.7 ruby-1.9.2 jruby ree)
+  end
+end
+
 task :default => :walk_the_path
 
 task :walk_the_path do
@@ -105,5 +127,40 @@ end
 SRC_FILES.each do |koan_src|
   file koan_src.pathmap("#{PROB_DIR}/%f") => [PROB_DIR, koan_src] do |t|
     Koans.make_koan_file koan_src, t.name
+  end
+end
+
+task :run do
+  puts 'koans'
+  Dir.chdir("src") do
+    puts "in #{Dir.pwd}"
+    sh "ruby path_to_enlightenment.rb"
+  end
+end
+
+
+desc "Pre-checkin tests (=> run_all)"
+task :cruise => :run_all
+
+desc "Run the completed koans againts a list of relevant Ruby Implementations"
+task :run_all do
+  results = {}
+  RubyImpls.list.each do |impl|
+    puts "=" * 40
+    puts "On Ruby #{impl}"
+    res = sh "rvm #{impl} rake run"
+    results[impl] = res
+    puts
+  end
+  puts "=" * 40
+  puts "Summary:"
+  puts
+  results.each do |impl, res|
+    puts "#{impl} => RAN"
+  end
+  puts
+  RubyImpls.expected.each do |requested_impl|
+    impl_pattern = Regexp.new(Regexp.quote(requested_impl))
+    puts "No Results for #{requested_impl}" if results.keys.grep(impl_pattern).empty?
   end
 end
