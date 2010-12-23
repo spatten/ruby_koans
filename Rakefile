@@ -62,7 +62,6 @@ module RubyImpls
   def self.find_ruby_impls
     rubys = `rvm list`.gsub(/=>/,'').split(/\n/).sort
     expected.map { |impl|
-      puts "DBG: impl=#{impl.inspect}"
       last = rubys.grep(Regexp.new(Regexp.quote(impl))).last
       last ? last.split.first : nil
     }.compact
