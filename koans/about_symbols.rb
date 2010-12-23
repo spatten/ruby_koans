@@ -11,8 +11,8 @@ class AboutSymbols < EdgeCase::Koan
     symbol2 = :a_symbol
     symbol3 = :something_else
 
-    assert symbol1 == __
-    assert symbol1 != __
+    assert_equal __, symbol1 == symbol2
+    assert_equal __, symbol1 == symbol3
   end
 
   def test_identical_symbols_are_a_single_internal_object
