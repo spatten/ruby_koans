@@ -15,6 +15,7 @@ today    = Time.now.strftime("%Y-%m-%d")
 TAR_FILE = "#{DIST_DIR}/rubykoans-#{today}.tgz"
 ZIP_FILE = "#{DIST_DIR}/rubykoans-#{today}.zip"
 
+CLEAN.include("**/*.rbc")
 CLOBBER.include(DIST_DIR)
 
 module Koans
