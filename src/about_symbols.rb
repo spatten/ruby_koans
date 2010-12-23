@@ -24,13 +24,14 @@ class AboutSymbols < EdgeCase::Koan
   end
 
   def test_method_names_become_symbols
-    assert_equal __(true), Symbol.all_symbols.include?("test_method_names_become_symbols".to_sym)
+    symbols_as_strings = Symbol.all_symbols.map { |x| x.to_s }
+    assert_equal __(true), symbols_as_strings.include?("test_method_names_become_symbols")
   end
 
   # THINK ABOUT IT:
   #
-  # Why do we capture the list of symbols before we check for the
-  # method name?
+  # Why do we convert the list of symbols to strings and then compare
+  # against the string value rather than against symbols?
 
   in_ruby_version("mri") do
     RubyConstant = "What is the sound of one hand clapping?"
