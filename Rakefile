@@ -143,12 +143,12 @@ task :cruise => :run_all
 
 desc "Run the completed koans againts a list of relevant Ruby Implementations"
 task :run_all do
-  results = {}
+  results = []
   RubyImpls.list.each do |impl|
     puts "=" * 40
     puts "On Ruby #{impl}"
-    res = sh "rvm #{impl} rake run"
-    results[impl] = res
+    sh "rvm #{impl} rake run"
+    results << [impl, "RAN"]
     puts
   end
   puts "=" * 40
@@ -160,6 +160,6 @@ task :run_all do
   puts
   RubyImpls.expected.each do |requested_impl|
     impl_pattern = Regexp.new(Regexp.quote(requested_impl))
-    puts "No Results for #{requested_impl}" if results.keys.grep(impl_pattern).empty?
+    puts "No Results for #{requested_impl}" unless results.detect { |x| x.first =~ impl_pattern }
   end
 end
