@@ -44,7 +44,7 @@ class AboutMethods < EdgeCase::Koan
       my_global_method
     end
     #--
-    pattern = "wrong (number|#) of arguments"
+    pattern = "wrong (number|#) of arguments|given \\d+, expected \\d+"
     #++
     assert_match(/#{__(pattern)}/, exception.message)
 

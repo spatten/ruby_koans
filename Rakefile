@@ -75,7 +75,7 @@ module RubyImpls
 
   # List of expected ruby implementations.
   def self.expected
-    %w(ruby-1.8.6 ruby-1.8.7 ruby-1.9.2 jruby ree)
+    %w(ruby-1.8.6 ruby-1.8.7 ruby-1.9.2 jruby ree rbx)
   end
 end
 
