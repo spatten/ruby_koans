@@ -31,7 +31,7 @@ class AboutInheritance < EdgeCase::Koan
     assert_equal __, Chihuahua.ancestors.include?(Object)
   end
 
-  def test_subcases_inherit_behavior_from_parent_class
+  def test_subclasses_inherit_behavior_from_parent_class
     chico = Chihuahua.new("Chico")
     assert_equal __, chico.name
   end
