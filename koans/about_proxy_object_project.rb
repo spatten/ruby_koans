@@ -33,7 +33,8 @@ class AboutProxyObjectProject < EdgeCase::Koan
   
   def test_tv_methods_still_perform_their_function
     tv = Proxy.new(Television.new)
-    
+
+    # HINT Proxy class is defined above, may need tweaking...
     tv.channel = 10
     tv.power
     
