@@ -183,7 +183,7 @@ EOS
     assert_equal __("Now is the time"), words.join(" ")
   end
 
-  def test_strings_are_not_unique_objects
+  def test_strings_are_unique_objects
     a = "a string"
     b = "a string"
 
