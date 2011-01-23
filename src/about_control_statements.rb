@@ -93,6 +93,16 @@ class AboutControlStatements < EdgeCase::Koan
     assert_equal __(3628800), result
   end
 
+  def test_break_statement_returns_values
+    i = 1
+    result = while i <= 10
+      break i if i % 2 == 0
+      i += 1
+    end
+
+    assert_equal __(2), result
+  end
+
   def test_next_statement
     i = 0
     result = []
