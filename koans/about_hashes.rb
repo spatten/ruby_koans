@@ -63,4 +63,18 @@ class AboutHashes < EdgeCase::Koan
     expected = { "jim" => __, "amy" => 20, "dan" => 23, "jenny" => __ }
     assert_equal __, expected == new_hash
   end
+
+  def test_default_value
+    hash1 = Hash.new
+    hash1[:one] = 1
+
+    assert_equal __, hash1[:one]
+    assert_equal __, hash1[:two]
+
+    hash2 = Hash.new("dos")
+    hash2[:one] = 1
+
+    assert_equal __, hash2[:one]
+    assert_equal __, hash2[:two]
+  end
 end
