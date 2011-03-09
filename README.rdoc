@@ -139,6 +139,6 @@ Requires       :: Ruby 1.8.x or later and Rake (any recent version)
 
 http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png
 
-GitImmersion is release under a Creative Commons,
+RubyKoans is released under a Creative Commons,
 Attribution-NonCommercial-ShareAlike, Version 3.0
 (http://creativecommons.org/licenses/by-nc-sa/3.0/) License.
