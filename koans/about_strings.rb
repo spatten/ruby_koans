@@ -168,7 +168,7 @@ in_ruby_version("1.8") do
 
     def test_in_ruby_1_9_you_can_get_a_single_character_from_a_string
       string = "Bacon, lettuce and tomato"
-      assert_equal "a", string[1]
+      assert_equal "__", string[1]
 
       # Surprised?
     end
