@@ -84,7 +84,7 @@ class AboutSymbols < EdgeCase::Koan
   # interesting string operations are available on symbols.
 
   def test_symbols_cannot_be_concatenated
-    # Exceptions will be pondered further father down the path
+    # Exceptions will be pondered further farther down the path
     assert_raise(___) do
       :cats + :dogs
     end
