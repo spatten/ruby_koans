@@ -65,7 +65,7 @@ class AboutIteration < EdgeCase::Koan
     result = [2, 3, 4].inject(0) { |sum, item| sum + item }
     assert_equal __, result
 
-    result2 = [2, 3, 4].inject(1) { |sum, item| sum * item }
+    result2 = [2, 3, 4].inject(1) { |product, item| product * item }
     assert_equal __, result2
 
     # Extra Credit:
