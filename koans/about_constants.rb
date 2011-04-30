@@ -67,7 +67,7 @@ class AboutConstants < EdgeCase::Koan
   end
 
   # QUESTION: Which has precedence: The constant in the lexical scope,
-  # or the constant from the inheritance heirarachy?
+  # or the constant from the inheritance hierarchy?
 
   # ------------------------------------------------------------------
 

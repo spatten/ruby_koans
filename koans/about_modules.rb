@@ -42,7 +42,7 @@ class AboutModules < EdgeCase::Koan
     assert_equal __, fido.bark
   end
 
-  def test_module_methods_are_also_availble_in_the_object
+  def test_module_methods_are_also_available_in_the_object
     fido = Dog.new
     assert_nothing_raised(Exception) do
       fido.set_name("Rover")
