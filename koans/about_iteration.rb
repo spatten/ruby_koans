@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 class AboutIteration < EdgeCase::Koan
 
   def test_each_is_a_method_on_arrays
-    [].methods.include?("each")
+    assert_equal __, [].methods.include?(:each)
   end
 
   def test_iterating_with_each
