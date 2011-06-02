@@ -5,7 +5,7 @@ include Java
 # Concepts
 # * Pull in a java class
 # * calling a method, Camel vs snake
-# * Resovling module/class name conflicts
+# * Resolving module/class name conflicts
 # * Showing what gets returned
 # * Ruby Strings  VS Java Strings
 # * Calling custom java class
