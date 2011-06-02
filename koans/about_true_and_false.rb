@@ -10,7 +10,7 @@ class AboutTrueAndFalse < EdgeCase::Koan
   end
 
   def test_true_is_treated_as_true
-    assert_equal __, truth_value(true)    
+    assert_equal __, truth_value(true)
   end
 
   def test_false_is_treated_as_false
