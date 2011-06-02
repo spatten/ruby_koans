@@ -29,5 +29,5 @@ namespace "check" do
   end
 end
 
-desc "Run some simple consistancy checks"
+desc "Run some simple consistency checks"
 task :check => ["check:abouts", "check:asserts"]

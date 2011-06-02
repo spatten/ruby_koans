@@ -21,7 +21,7 @@ def in_ruby_version(*versions)
 end
 
 # Standard, generic replacement value.
-# If value19 is given, it is used inplace of value for Ruby 1.9.
+# If value19 is given, it is used in place of value for Ruby 1.9.
 def __(value="FILL ME IN", value19=:mu)
   if RUBY_VERSION < "1.9"
     value
