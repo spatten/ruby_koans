@@ -99,7 +99,7 @@ class AboutMessagePassing < EdgeCase::Koan
     # keep in mind you can't call method_missing like that in Ruby
     # 1.9. normally.
     #
-    # Thanks.  We now return you to your regularly schedule Ruby
+    # Thanks.  We now return you to your regularly scheduled Ruby
     # Koans.
   end
 
