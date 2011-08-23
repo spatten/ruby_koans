@@ -2,7 +2,6 @@
 # -*- ruby -*-
 
 require 'test/unit/assertions'
-require 'rubygems'
 require 'win32console'
 # --------------------------------------------------------------------
 # Support code for the Ruby Koans.
