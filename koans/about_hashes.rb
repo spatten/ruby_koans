@@ -20,6 +20,18 @@ class AboutHashes < EdgeCase::Koan
     assert_equal __, hash[:doesnt_exist]
   end
 
+  def test_accessing_hashes_with_fetch
+    hash = { :one => "uno" }
+    assert_equal "uno", hash.fetch(:one)
+    assert_raise(___) do
+      hash.fetch(:doesnt_exist)
+    end
+
+    # THINK ABOUT IT:
+    #
+    # Why might you want to use #fetch instead of #[] when accessing hash keys?
+  end
+
   def test_changing_hashes
     hash = { :one => "uno", :two => "dos" }
     hash[:one] = "eins"
