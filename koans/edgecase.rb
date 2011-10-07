@@ -2,7 +2,10 @@
 # -*- ruby -*-
 
 require 'test/unit/assertions'
-
+begin 
+  require 'win32console'
+rescue LoadError
+end
 # --------------------------------------------------------------------
 # Support code for the Ruby Koans.
 # --------------------------------------------------------------------
@@ -107,7 +110,9 @@ module EdgeCase
     def use_colors?
       return false if ENV['NO_COLOR']
       if ENV['ANSI_COLOR'].nil?
-        ! using_windows?
+        if using_windows?
+          using_win32console
+        end
       else
         ENV['ANSI_COLOR'] =~ /^(t|y)/i
       end
@@ -115,6 +120,9 @@ module EdgeCase
 
     def using_windows?
       File::ALT_SEPARATOR
+    end
+    def using_win32console
+      defined? Win32::Console
     end
   end
 
