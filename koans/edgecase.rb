@@ -4,9 +4,9 @@
 require 'test/unit/assertions'
 begin 
   require 'win32console'
-  @using_win32console = true
+  USING_WIN32CONSOLE = true
 rescue LoadError
-  @using_win32console = false
+  USING_WIN32CONSOLE = false
 end
 # --------------------------------------------------------------------
 # Support code for the Ruby Koans.
@@ -124,7 +124,7 @@ module EdgeCase
       File::ALT_SEPARATOR
     end
     def using_win32console
-        @using_win32console
+        USING_WIN32CONSOLE
     end
   end
 
