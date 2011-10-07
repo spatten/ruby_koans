@@ -2,7 +2,12 @@
 # -*- ruby -*-
 
 require 'test/unit/assertions'
-require 'win32console'
+begin 
+  require 'win32console'
+  @using_win32console = true
+rescue LoadError
+  @using_win32console = false
+end
 # --------------------------------------------------------------------
 # Support code for the Ruby Koans.
 # --------------------------------------------------------------------
@@ -120,7 +125,7 @@ module EdgeCase
     end
     def using_win32console
       begin
-        !! Win32::Console::ANSI
+        @using_win32console
       rescue
         return false
       end
