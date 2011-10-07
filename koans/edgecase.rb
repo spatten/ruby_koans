@@ -124,11 +124,7 @@ module EdgeCase
       File::ALT_SEPARATOR
     end
     def using_win32console
-      begin
         @using_win32console
-      rescue
-        return false
-      end
     end
   end
 
