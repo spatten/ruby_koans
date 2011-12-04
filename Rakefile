@@ -2,7 +2,11 @@
 # -*- ruby -*-
 
 require 'rake/clean'
-require 'rdoc/task'
+begin
+  require 'rdoc/task'
+rescue LoadError => ex
+  # No rdoc task availble.
+end
 
 SRC_DIR      = 'src'
 PROB_DIR     = 'koans'
@@ -63,7 +67,7 @@ end
 module RubyImpls
   # Calculate the list of relevant Ruby implementations.
   def self.find_ruby_impls
-    rubys = `rvm list`.gsub(/=>/,'').split(/\n/).sort
+    rubys = `rvm list`.gsub(/=>/,'').split(/\n/).map { |x| x.strip }.reject { |x| x.empty? || x =~ /^rvm/ }.sort
     expected.map { |impl|
       last = rubys.grep(Regexp.new(Regexp.quote(impl))).last
       last ? last.split.first : nil
@@ -77,7 +81,7 @@ module RubyImpls
 
   # List of expected ruby implementations.
   def self.expected
-    %w(ruby-1.8.6 ruby-1.8.7 ruby-1.9.2 jruby ree)
+    %w(ruby-1.8.7 ruby-1.9.2 jruby ree)
   end
 end
 
@@ -88,9 +92,11 @@ task :walk_the_path do
   ruby 'path_to_enlightenment.rb'
 end
 
-Rake::RDocTask.new do |rd|
-  rd.main = "README.rdoc"
-  rd.rdoc_files.include("README.rdoc", "koans/*.rb")
+if defined?(Rake::RDocTask)
+  Rake::RDocTask.new do |rd|
+    rd.main = "README.rdoc"
+    rd.rdoc_files.include("README.rdoc", "koans/*.rb")
+  end
 end
 
 directory DIST_DIR
@@ -150,7 +156,7 @@ task :run_all do
   RubyImpls.list.each do |impl|
     puts "=" * 40
     puts "On Ruby #{impl}"
-    sh "rvm #{impl} rake run"
+    sh ". rvm #{impl}; rake run"
     results << [impl, "RAN"]
     puts
   end
