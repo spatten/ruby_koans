@@ -20,6 +20,18 @@ class AboutHashes < EdgeCase::Koan
     assert_equal __(nil), hash[:doesnt_exist]
   end
 
+  def test_accessing_hashes_with_fetch
+    hash = { :one => "uno" }
+    assert_equal "uno", hash.fetch(:one)
+    assert_raise(___(IndexError)) do
+      hash.fetch(:doesnt_exist)
+    end
+
+    # THINK ABOUT IT:
+    #
+    # Why might you want to use #fetch instead of #[] when accessing hash keys?
+  end
+
   def test_changing_hashes
     hash = { :one => "uno", :two => "dos" }
     hash[:one] = "eins"
@@ -62,5 +74,43 @@ class AboutHashes < EdgeCase::Koan
 
     expected = { "jim" => __(54), "amy" => 20, "dan" => 23, "jenny" => __(26) }
     assert_equal __(true), expected == new_hash
+  end
+
+  def test_default_value
+    hash1 = Hash.new
+    hash1[:one] = 1
+
+    assert_equal __(1), hash1[:one]
+    assert_equal __(nil), hash1[:two]
+
+    hash2 = Hash.new("dos")
+    hash2[:one] = 1
+
+    assert_equal __(1), hash2[:one]
+    assert_equal __("dos"), hash2[:two]
+  end
+
+  def test_default_value_is_the_same_object
+    hash = Hash.new([])
+
+    hash[:one] << "uno"
+    hash[:two] << "dos"
+
+    assert_equal __(["uno", "dos"]), hash[:one]
+    assert_equal __(["uno", "dos"]), hash[:two]
+    assert_equal __(["uno", "dos"]), hash[:three]
+
+    assert_equal __(true), hash[:one].object_id == hash[:two].object_id
+  end
+
+  def test_default_value_with_block
+    hash = Hash.new {|hash, key| hash[key] = [] }
+
+    hash[:one] << "uno"
+    hash[:two] << "dos"
+
+    assert_equal __(["uno"]), hash[:one]
+    assert_equal __(["dos"]), hash[:two]
+    assert_equal __([]), hash[:three]
   end
 end

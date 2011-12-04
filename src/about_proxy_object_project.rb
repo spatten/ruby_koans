@@ -29,7 +29,7 @@ class Proxy
     @messages << sym
     @object.send(sym, *args, &block)
   end
-  
+
   def called?(method)
     @messages.include?(method)
   end
@@ -46,50 +46,52 @@ class AboutProxyObjectProject < EdgeCase::Koan
   def test_proxy_method_returns_wrapped_object
     # NOTE: The Television class is defined below
     tv = Proxy.new(Television.new)
-    
+
+    # HINT: Proxy class is defined above, may need tweaking...
+
     assert tv.instance_of?(Proxy)
   end
-  
+
   def test_tv_methods_still_perform_their_function
     tv = Proxy.new(Television.new)
-    
+
     tv.channel = 10
     tv.power
-    
+
     assert_equal 10, tv.channel
     assert tv.on?
   end
 
   def test_proxy_records_messages_sent_to_tv
     tv = Proxy.new(Television.new)
-    
+
     tv.power
     tv.channel = 10
-    
+
     assert_equal [:power, :channel=], tv.messages
   end
-  
+
   def test_proxy_handles_invalid_messages
     tv = Proxy.new(Television.new)
-    
+
     assert_raise(NoMethodError) do
       tv.no_such_method
     end
   end
-  
+
   def test_proxy_reports_methods_have_been_called
     tv = Proxy.new(Television.new)
-    
+
     tv.power
     tv.power
-    
+
     assert tv.called?(:power)
     assert ! tv.called?(:channel)
   end
-  
+
   def test_proxy_counts_method_calls
     tv = Proxy.new(Television.new)
-    
+
     tv.power
     tv.channel = 48
     tv.power
@@ -118,7 +120,7 @@ end
 # Example class using in the proxy testing above.
 class Television
   attr_accessor :channel
-  
+
   def power
     if @power == :on
       @power = :off
@@ -126,7 +128,7 @@ class Television
       @power = :on
     end
   end
-  
+
   def on?
     @power == :on
   end
@@ -136,31 +138,31 @@ end
 class TelevisionTest < EdgeCase::Koan
   def test_it_turns_on
     tv = Television.new
-    
+
     tv.power
     assert tv.on?
   end
-  
+
   def test_it_also_turns_off
     tv = Television.new
-    
+
     tv.power
     tv.power
-    
+
     assert ! tv.on?
   end
-  
+
   def test_edge_case_on_off
     tv = Television.new
-    
+
     tv.power
     tv.power
     tv.power
-        
+
     assert tv.on?
-    
+
     tv.power
-    
+
     assert ! tv.on?
   end
 

@@ -126,7 +126,7 @@ class AboutClasses < EdgeCase::Koan
     # Why is this so?
   end
 
-  def test_different_objects_have_difference_instance_variables
+  def test_different_objects_have_different_instance_variables
     fido = Dog6.new("Fido")
     rover = Dog6.new("Rover")
 

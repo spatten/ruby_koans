@@ -59,10 +59,18 @@ class AboutControlStatements < EdgeCase::Koan
 
   def test_unless_statement
     result = :default_value
-    unless false
+    unless false    # same as saying 'if !false', which evaluates as 'if true'
       result = :false_value
     end
     assert_equal __(:false_value), result
+  end
+
+  def test_unless_statement_evaluate_true
+    result = :default_value
+    unless true    # same as saying 'if !true', which evaluates as 'if false'
+      result = :true_value
+    end
+    assert_equal __(:default_value), result
   end
 
   def test_unless_statement_modifier
@@ -109,7 +117,7 @@ class AboutControlStatements < EdgeCase::Koan
     while i < 10
       i += 1
       next if (i % 2) == 0
-      result << i 
+      result << i
     end
     assert_equal __([1, 3, 5, 7, 9]), result
   end
