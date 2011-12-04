@@ -36,6 +36,8 @@ Windows from the command prompt (cmd.exe)
    c:\ruby --version
    c:\rake --version
 
+If you don't have rake installed, just run `gem install rake`
+
 Any response for Ruby with a version number greater than 1.8 is fine (should be
 around 1.8.6 or more). Any version of rake will do.
 
@@ -130,7 +132,15 @@ Brian Marick's fantastic guide for beginners Everyday Scripting with Ruby    :: 
 
 = Other stuff
 
-Author         ::   Jim Weirich <jim@weirichhouse.org>
-Author         ::   Joe O'Brien <joe@edgecase.com>
+Author         :: Jim Weirich <jim@weirichhouse.org>
+Author         :: Joe O'Brien <joe@edgecase.com>
 Issue Tracker  :: http://www.pivotaltracker.com/projects/48111
 Requires       :: Ruby 1.8.x or later and Rake (any recent version)
+
+= License
+
+http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png
+
+RubyKoans is released under a Creative Commons,
+Attribution-NonCommercial-ShareAlike, Version 3.0
+(http://creativecommons.org/licenses/by-nc-sa/3.0/) License.
