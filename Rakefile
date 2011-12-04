@@ -2,7 +2,7 @@
 # -*- ruby -*-
 
 require 'rake/clean'
-require 'rake/rdoctask'
+require 'rdoc/task'
 
 SRC_DIR      = 'src'
 PROB_DIR     = 'koans'
