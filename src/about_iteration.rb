@@ -2,8 +2,29 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 
 class AboutIteration < EdgeCase::Koan
 
+  # -- An Aside ------------------------------------------------------
+  # Ruby 1.8 stores names as strings. Ruby 1.9 stores names as
+  # symbols. So we use a version dependent method "as_name" to convert
+  # to the right format in the koans.  We will use "as_name" whenever
+  # comparing to lists of methods.
+
+  in_ruby_version("1.8") do
+    def as_name(name)
+      name.to_s
+    end
+  end
+
+  in_ruby_version("1.9") do
+    def as_name(name)
+      name.to_sym
+    end
+  end
+
+  # Ok, now back to the Koans.
+  # -------------------------------------------------------------------
+
   def test_each_is_a_method_on_arrays
-    [].methods.include?("each")
+    assert_equal __(true), [].methods.include?(as_name(:each))
   end
 
   def test_iterating_with_each
