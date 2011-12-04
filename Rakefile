@@ -19,6 +19,8 @@ CLEAN.include("**/*.rbc")
 CLOBBER.include(DIST_DIR)
 
 module Koans
+  extend Rake::DSL if defined?(Rake::DSL)
+
   # Remove solution info from source
   #   __(a,b)     => __
   #   _n_(number) => __
