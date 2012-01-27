@@ -41,6 +41,19 @@ If you don't have rake installed, just run `gem install rake`
 Any response for Ruby with a version number greater than 1.8 is fine (should be
 around 1.8.6 or more). Any version of rake will do.
 
+== Generating the Koans
+
+A fresh checkout will not include the koans, you will need to generate
+them.
+
+    [ruby_koans] $ rake gen                       # generates the
+    koans directory
+
+If you need to regenerate the koans, thus wiping your current `koans`,
+
+    [ruby_koans] $ rake regen                     # regenerates the
+    koans directory, wiping the original
+
 == The Path To Enlightenment
 
 You can run the tests through rake or by calling the file itself (rake is the
