@@ -46,13 +46,11 @@ around 1.8.6 or more). Any version of rake will do.
 A fresh checkout will not include the koans, you will need to generate
 them.
 
-    [ruby_koans] $ rake gen                       # generates the
-    koans directory
+    [ruby_koans] $ rake gen                       # generates the koans directory
 
 If you need to regenerate the koans, thus wiping your current `koans`,
 
-    [ruby_koans] $ rake regen                     # regenerates the
-    koans directory, wiping the original
+    [ruby_koans] $ rake regen                     # regenerates the koans directory, wiping the original
 
 == The Path To Enlightenment
 
