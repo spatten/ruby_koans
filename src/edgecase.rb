@@ -122,6 +122,8 @@ module EdgeCase
       if ENV['ANSI_COLOR'].nil?
         if using_windows?
           using_win32console
+        else
+          return true
         end
       else
         ENV['ANSI_COLOR'] =~ /^(t|y)/i
