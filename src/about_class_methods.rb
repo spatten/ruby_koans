@@ -47,7 +47,7 @@ class AboutClassMethods < EdgeCase::Koan
   end
 
   # ------------------------------------------------------------------
-  
+
   class Dog2
     def wag
       :instance_level_wag
@@ -96,14 +96,13 @@ class AboutClassMethods < EdgeCase::Koan
   def test_you_can_define_class_methods_inside_the_class
     assert_equal __(:dogs_class_method), Dog.a_class_method
   end
-      
 
   # ------------------------------------------------------------------
 
   LastExpressionInClassStatement = class Dog
                                      21
                                    end
-  
+
   def test_class_statements_return_the_value_of_their_last_expression
     assert_equal __(21), LastExpressionInClassStatement
   end
