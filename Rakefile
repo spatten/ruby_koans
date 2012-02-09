@@ -42,8 +42,6 @@ module Koans
   def Koans.make_koan_file(infile, outfile)
     if infile =~ /edgecase/
       cp infile, outfile
-    elsif infile =~ /autotest/
-      cp_r infile, outfile
     else
       open(infile) do |ins|
         open(outfile, "w") do |outs|
