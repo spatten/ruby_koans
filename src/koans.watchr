@@ -1,3 +1,3 @@
 watch( '.*\.rb' ) do
-  system("ruby path_to_enlightenment.rb")
+  system 'rake'
 end
