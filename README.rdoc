@@ -80,26 +80,31 @@ The very first time you run it you will see the following output:
 
     [ ruby_koans ] $ rake
     (in /Users/person/dev/ruby_koans)
-    cd koans
+    /usr/bin/ruby1.8 path_to_enlightenment.rb
 
-    Thinking AboutAsserts
-      test_assert_truth has damaged your karma.
+    AboutAsserts#test_assert_truth has damaged your karma.
 
-    You have not yet reached enlightenment ...
+    The Master says:
+    You have not yet reached enlightenment.
+
+    The answers you seek...
     <false> is not true.
 
     Please meditate on the following code:
     ./about_asserts.rb:10:in `test_assert_truth'
-    path_to_enlightenment.rb:27
+    path_to_enlightenment.rb:38:in `each_with_index'
+    path_to_enlightenment.rb:38
 
     mountains are merely mountains
+    your path thus far [X_________________________________________________] 0/280
 
 You have come to your first stage. If you notice it is telling you where to look for
 the first solution:
 
     Please meditate on the following code:
     ./about_asserts.rb:10:in `test_assert_truth'
-    path_to_enlightenment.rb:27
+    path_to_enlightenment.rb:38:in `each_with_index'
+    path_to_enlightenment.rb:38
 
 We then open up the about_asserts.rb file and look at the first test:
 
