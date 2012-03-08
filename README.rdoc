@@ -71,7 +71,7 @@ Windows is the same thing
 
 In test-driven development the mantra has always been, red, green, refactor.  Write a
 failing test and run it (red), make the test pass (green), then refactor it (that is
-look at the code and see if you can make it any better.  In this case you will need
+look at the code and see if you can make it any better).  In this case you will need
 to run the koan and see it fail (red), make the test pass (green), then take a
 moment and reflect upon the test to see what it is teaching you and improve the
 code to better communicate its intent (refactor).
@@ -80,26 +80,31 @@ The very first time you run it you will see the following output:
 
     [ ruby_koans ] $ rake
     (in /Users/person/dev/ruby_koans)
-    cd koans
+    /usr/bin/ruby1.8 path_to_enlightenment.rb
 
-    Thinking AboutAsserts
-      test_assert_truth has damaged your karma.
+    AboutAsserts#test_assert_truth has damaged your karma.
 
-    You have not yet reached enlightenment ...
+    The Master says:
+    You have not yet reached enlightenment.
+
+    The answers you seek...
     <false> is not true.
 
     Please meditate on the following code:
     ./about_asserts.rb:10:in `test_assert_truth'
-    path_to_enlightenment.rb:27
+    path_to_enlightenment.rb:38:in `each_with_index'
+    path_to_enlightenment.rb:38
 
     mountains are merely mountains
+    your path thus far [X_________________________________________________] 0/280
 
 You have come to your first stage. If you notice it is telling you where to look for
 the first solution:
 
     Please meditate on the following code:
     ./about_asserts.rb:10:in `test_assert_truth'
-    path_to_enlightenment.rb:27
+    path_to_enlightenment.rb:38:in `each_with_index'
+    path_to_enlightenment.rb:38
 
 We then open up the about_asserts.rb file and look at the first test:
 
