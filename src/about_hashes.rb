@@ -37,7 +37,7 @@ class AboutHashes < EdgeCase::Koan
     hash[:one] = "eins"
 
     expected = { :one => __("eins"), :two => "dos" }
-    assert_equal __(true), expected == hash
+    assert_equal __(expected), hash
 
     # Bonus Question: Why was "expected" broken out into a variable
     # rather than used as a literal?
