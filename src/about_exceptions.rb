@@ -48,7 +48,7 @@ class AboutExceptions < EdgeCase::Koan
     result = nil
     begin
       fail "Oops"
-    rescue StandardError => ex
+    rescue StandardError
       # no code here
     ensure
       result = :always_run

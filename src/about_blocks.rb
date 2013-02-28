@@ -23,7 +23,7 @@ class AboutBlocks < EdgeCase::Koan
   end
 
   def test_blocks_can_take_arguments
-    result = method_with_block_arguments do |argument|
+    method_with_block_arguments do |argument|
       assert_equal __("Jim"), argument
     end
   end
