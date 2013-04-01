@@ -83,6 +83,7 @@ class String
   end
 end
 
+# TODO: Change EdgeCase to Neo
 module EdgeCase
   class << self
     def simple_output
