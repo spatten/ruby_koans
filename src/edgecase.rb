@@ -147,7 +147,7 @@ module EdgeCase
       AssertionError = Test::Unit::AssertionFailedError
     end
 
-    in_ruby_version("1.9") do
+    in_ruby_version("1.9", "2.0") do
       if defined?(MiniTest)
         AssertionError = MiniTest::Assertion
       else
