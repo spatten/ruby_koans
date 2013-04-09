@@ -147,7 +147,7 @@ class AboutClasses < Neo::Koan
     end
 
     def to_s
-      __(@name)
+      @name
     end
 
     def inspect
