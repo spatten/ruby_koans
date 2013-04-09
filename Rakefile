@@ -5,17 +5,14 @@ require 'rake/clean'
 
 SRC_DIR      = 'src'
 PROB_DIR     = 'koans'
-DIST_DIR     = 'dist'
+DOWNLOAD_DIR = 'download'
 
 SRC_FILES = FileList["#{SRC_DIR}/*"]
 KOAN_FILES = SRC_FILES.pathmap("#{PROB_DIR}/%f")
 
-today    = Time.now.strftime("%Y-%m-%d")
-TAR_FILE = "#{DIST_DIR}/rubykoans-#{today}.tgz"
-ZIP_FILE = "#{DIST_DIR}/rubykoans-#{today}.zip"
+ZIP_FILE = "#{DOWNLOAD_DIR}/rubykoans.zip"
 
 CLEAN.include("**/*.rbc")
-CLOBBER.include(DIST_DIR)
 
 module Koans
   extend Rake::DSL if defined?(Rake::DSL)
@@ -85,23 +82,18 @@ task :walk_the_path do
   ruby 'path_to_enlightenment.rb'
 end
 
-directory DIST_DIR
+directory DOWNLOAD_DIR
 directory PROB_DIR
 
-file ZIP_FILE => KOAN_FILES + [DIST_DIR] do
+file ZIP_FILE => KOAN_FILES + [DOWNLOAD_DIR] do
   sh "zip #{ZIP_FILE} #{PROB_DIR}/*"
 end
 
-file TAR_FILE => KOAN_FILES + [DIST_DIR] do
-  sh "tar zcvf #{TAR_FILE} #{PROB_DIR}"
-end
-
 desc "Create packaged files for distribution"
-task :package => [TAR_FILE, ZIP_FILE]
+task :package => [ZIP_FILE]
 
 desc "Upload the package files to the web server"
-task :upload => [TAR_FILE, ZIP_FILE] do
-  sh "scp #{TAR_FILE} linode:sites/onestepback.org/download"
+task :upload => [ZIP_FILE] do
   sh "scp #{ZIP_FILE} linode:sites/onestepback.org/download"
 end
 
