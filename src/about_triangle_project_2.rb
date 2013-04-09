@@ -12,6 +12,6 @@ class AboutTriangleProject2 < EdgeCase::Koan
     assert_raise(TriangleError) do triangle(1, 1, 3) end
     assert_raise(TriangleError) do triangle(2, 4, 2) end
     # HINT: for tips, see http://stackoverflow.com/questions/3834203/ruby-koan-151-raising-exceptions
- end
+  end
 end
 
