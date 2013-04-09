@@ -39,19 +39,19 @@ class AboutIteration < EdgeCase::Koan
   def test_each_can_use_curly_brace_blocks_too
     array = [1, 2, 3]
     sum = 0
-    array.each { |item|
+    array.each do |item|
       sum += item
-    }
+    end
     assert_equal __(6), sum
   end
 
   def test_break_works_with_each_style_iterations
     array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     sum = 0
-    array.each { |item|
+    array.each do |item|
       break if item > 3
       sum += item
-    }
+    end
     assert_equal __(6), sum
   end
 
