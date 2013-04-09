@@ -4,7 +4,7 @@ class AboutHashes < EdgeCase::Koan
   def test_creating_hashes
     empty_hash = Hash.new
     assert_equal __(Hash), empty_hash.class
-    assert_equal({}, empty_hash) # __
+    assert_equal(__({}), empty_hash)
     assert_equal __(0), empty_hash.size
   end
 
