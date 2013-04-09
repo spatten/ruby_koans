@@ -2,11 +2,6 @@
 # -*- ruby -*-
 
 require 'rake/clean'
-begin
-  require 'rdoc/task'
-rescue LoadError => ex
-  # No rdoc task availble.
-end
 
 SRC_DIR      = 'src'
 PROB_DIR     = 'koans'
@@ -88,13 +83,6 @@ task :default => :walk_the_path
 task :walk_the_path do
   cd PROB_DIR
   ruby 'path_to_enlightenment.rb'
-end
-
-if defined?(Rake::RDocTask)
-  Rake::RDocTask.new do |rd|
-    rd.main = "README.rdoc"
-    rd.rdoc_files.include("README.rdoc", "${PROB_DIR}/*.rb")
-  end
 end
 
 directory DIST_DIR
