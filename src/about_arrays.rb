@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutArrays < EdgeCase::Koan
+class AboutArrays < Neo::Koan
   def test_creating_arrays
     empty_array = Array.new
     assert_equal __(Array), empty_array.class

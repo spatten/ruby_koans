@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 # Implement a DiceSet Class here:
 #
@@ -15,7 +15,7 @@ class DiceSet
 end
 
 #++
-class AboutDiceProject < EdgeCase::Koan
+class AboutDiceProject < Neo::Koan
   def test_can_create_a_dice_set
     dice = DiceSet.new
     assert_not_nil dice

@@ -83,8 +83,7 @@ class String
   end
 end
 
-# TODO: Change EdgeCase to Neo
-module EdgeCase
+module Neo
   class << self
     def simple_output
       ENV['SIMPLE_KOAN_OUTPUT'] == 'true'
@@ -196,7 +195,7 @@ module EdgeCase
         @failure = step.failure
         add_progress(@pass_count)
         @observations << Color.red("#{step.koan_file}##{step.name} has damaged your karma.")
-        throw :edgecase_exit
+        throw :neo_exit
       end
     end
 
@@ -222,7 +221,7 @@ module EdgeCase
 
     def show_progress
       bar_width = 50
-      total_tests = EdgeCase::Koan.total_tests
+      total_tests = Neo::Koan.total_tests
       scale = bar_width.to_f/total_tests
       print Color.green("your path thus far [")
       happy_steps = (pass_count*scale).to_i
@@ -238,7 +237,7 @@ module EdgeCase
     end
 
     def end_screen
-      if EdgeCase.simple_output
+      if Neo.simple_output
         boring_end_screen
       else
         artistic_end_screen
@@ -275,7 +274,7 @@ module EdgeCase
 ,:::::::::::::,                brought to you by                 ,,::::::::::::,
 ::::::::::::::                                                    ,::::::::::::
  ::::::::::::::,                                                 ,:::::::::::::
- ::::::::::::,             EdgeCase Software Artisans           , ::::::::::::
+ ::::::::::::,               Neo Software Artisans              , ::::::::::::
   :,::::::::: ::::                                               :::::::::::::
    ,:::::::::::  ,:                                          ,,:::::::::::::,
      ::::::::::::                                           ,::::::::::::::,
@@ -337,7 +336,7 @@ ENDTEXT
 
     def find_interesting_lines(backtrace)
       backtrace.reject { |line|
-        line =~ /test\/unit\/|edgecase\.rb|minitest/
+        line =~ /test\/unit\/|neo\.rb|minitest/
       }
     end
 
@@ -397,19 +396,19 @@ ENDTEXT
       setup
       begin
         send(name)
-      rescue StandardError, EdgeCase::Sensei::AssertionError => ex
+      rescue StandardError, Neo::Sensei::AssertionError => ex
         failed(ex)
       ensure
         begin
           teardown
-        rescue StandardError, EdgeCase::Sensei::AssertionError => ex
+        rescue StandardError, Neo::Sensei::AssertionError => ex
           failed(ex) if passed?
         end
       end
       self
     end
 
-    # Class methods for the EdgeCase test suite.
+    # Class methods for the Neo test suite.
     class << self
       def inherited(subclass)
         subclasses << subclass
@@ -466,7 +465,7 @@ ENDTEXT
 
   class ThePath
     def walk
-      sensei = EdgeCase::Sensei.new
+      sensei = Neo::Sensei.new
       each_step do |step|
         sensei.observe(step.meditate)
       end
@@ -474,9 +473,9 @@ ENDTEXT
     end
 
     def each_step
-      catch(:edgecase_exit) {
+      catch(:neo_exit) {
         step_count = 0
-        EdgeCase::Koan.subclasses.each_with_index do |koan,koan_index|
+        Neo::Koan.subclasses.each_with_index do |koan,koan_index|
           koan.testmethods.each do |method_name|
             step = koan.new(method_name, koan.to_s, koan_index+1, step_count+=1)
             yield step
@@ -488,6 +487,6 @@ ENDTEXT
 end
 
 END {
-  EdgeCase::Koan.command_line(ARGV)
-  EdgeCase::ThePath.new.walk
+  Neo::Koan.command_line(ARGV)
+  Neo::ThePath.new.walk
 }

@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutMessagePassing < EdgeCase::Koan
+class AboutMessagePassing < Neo::Koan
 
   class MessageCatcher
     def caught?

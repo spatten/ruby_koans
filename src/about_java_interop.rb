@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 include Java
 
@@ -11,7 +11,7 @@ include Java
 # * Calling custom java class
 # * Calling Ruby from java???
 
-class AboutJavaInterop < EdgeCase::Koan
+class AboutJavaInterop < Neo::Koan
   def test_using_a_java_library_class
     java_array = java.util.ArrayList.new
     assert_equal __(Java::JavaUtil::ArrayList), java_array.class

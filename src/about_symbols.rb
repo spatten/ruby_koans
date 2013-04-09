@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutSymbols < EdgeCase::Koan
+class AboutSymbols < Neo::Koan
   def test_symbols_are_symbols
     symbol = :ruby
     assert_equal __(true), symbol.is_a?(Symbol)

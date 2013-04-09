@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutBlocks < EdgeCase::Koan
+class AboutBlocks < Neo::Koan
   def method_with_block
     result = yield
     result

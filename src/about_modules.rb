@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutModules < EdgeCase::Koan
+class AboutModules < Neo::Koan
   module Nameable
     def set_name(new_name)
       @name = new_name

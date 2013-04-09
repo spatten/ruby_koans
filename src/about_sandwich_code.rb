@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutSandwichCode < EdgeCase::Koan
+class AboutSandwichCode < Neo::Koan
 
   def count_lines(file_name)
     file = open(file_name)

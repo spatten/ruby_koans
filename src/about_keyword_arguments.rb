@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutMethods < EdgeCase::Koan
+class AboutMethods < Neo::Koan
 
   def method_with_keyword_arguments(one: 1, two: 'two')
     [one, two]

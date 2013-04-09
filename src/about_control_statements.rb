@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutControlStatements < EdgeCase::Koan
+class AboutControlStatements < Neo::Koan
 
   def test_if_then_else_statements
     if true

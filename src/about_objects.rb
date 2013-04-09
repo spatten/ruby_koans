@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutObjects < EdgeCase::Koan
+class AboutObjects < Neo::Koan
   def test_everything_is_an_object
     assert_equal __(true), 1.is_a?(Object)
     assert_equal __(true), 1.5.is_a?(Object)

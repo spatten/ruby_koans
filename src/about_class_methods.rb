@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutClassMethods < EdgeCase::Koan
+class AboutClassMethods < Neo::Koan
   class Dog
   end
 
