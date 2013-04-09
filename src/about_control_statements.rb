@@ -130,5 +130,13 @@ class AboutControlStatements < Neo::Koan
     end
     assert_equal [__("FISH"), __("AND"), __("CHIPS")], result
   end
+  
+  def test_times_statement
+    i = 0
+    10.times do
+      i += 1
+    end
+    assert_equal __(10), result
+  end
 
 end
