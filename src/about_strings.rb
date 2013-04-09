@@ -42,6 +42,7 @@ It was the worst of times.
 }
     assert_equal __(54), long_string.length
     assert_equal __(3), long_string.lines.count
+    assert_equal __("\n"), long_string[0,1]
   end
 
   def test_here_documents_can_also_handle_multiple_lines
@@ -51,6 +52,7 @@ It was the worst of times.
 EOS
     assert_equal __(53), long_string.length
     assert_equal __(2), long_string.lines.count
+    assert_equal __("I"), long_string[0,1]
   end
 
   def test_plus_will_concatenate_two_strings
