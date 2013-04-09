@@ -50,14 +50,14 @@ class AboutSymbols < Neo::Koan
   def test_symbols_with_spaces_can_be_built
     symbol = :"cats and dogs"
 
-    assert_equal symbol, __("cats and dogs").to_sym
+    assert_equal __("cats and dogs").to_sym, symbol
   end
 
   def test_symbols_with_interpolation_can_be_built
     value = "and"
     symbol = :"cats #{value} dogs"
 
-    assert_equal symbol, __("cats and dogs").to_sym
+    assert_equal __("cats and dogs").to_sym, symbol
   end
 
   def test_to_s_is_called_on_interpolated_symbols
