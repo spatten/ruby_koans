@@ -32,7 +32,7 @@ module Koans
   end
 
   def Koans.make_koan_file(infile, outfile)
-    if infile =~ /edgecase/
+    if infile =~ /neo/
       cp infile, outfile
     else
       open(infile) do |ins|
