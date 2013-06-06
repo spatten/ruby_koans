@@ -39,9 +39,7 @@ class AboutIteration < Neo::Koan
   def test_each_can_use_curly_brace_blocks_too
     array = [1, 2, 3]
     sum = 0
-    array.each do |item|
-      sum += item
-    end
+    array.each { |item| sum += item }
     assert_equal __(6), sum
   end
 
