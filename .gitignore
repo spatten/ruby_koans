@@ -4,3 +4,4 @@ dist
 .rvmrc
 *.rbc
 koans/*
+*~
