@@ -85,8 +85,8 @@ end
 directory DOWNLOAD_DIR
 directory PROB_DIR
 
-desc "Build zip file"
-task :zip => [:clobber_zip, ZIP_FILE]
+desc "(re)Build zip file"
+task :zip => [:clobber_zip, :package]
 
 task :clobber_zip do
   rm ZIP_FILE
