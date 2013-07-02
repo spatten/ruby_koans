@@ -177,8 +177,8 @@ Brian Marick's fantastic guide for beginners Everyday Scripting with Ruby    :: 
 
 = Other stuff
 
-Author         :: Jim Weirich <jim@weirichhouse.org>
-Author         :: Joe O'Brien <joe@edgecase.com>
+Author         :: Jim Weirich <jim@neo.org>
+Author         :: Joe O'Brien <joe@objo.com>
 Issue Tracker  :: http://www.pivotaltracker.com/projects/48111
 Requires       :: Ruby 1.8.x or later and Rake (any recent version)
 
