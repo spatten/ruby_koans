@@ -356,11 +356,7 @@ ENDTEXT
       puts Color.red(indent(failure.message).join)
       puts
       puts "Please meditate on the following code:"
-      if assert_failed?
-        puts embolden_first_line_only(indent(find_interesting_lines(failure.backtrace)))
-      else
-        puts embolden_first_line_only(indent(failure.backtrace))
-      end
+      puts embolden_first_line_only(indent(find_interesting_lines(failure.backtrace)))
       puts
     end
 
@@ -383,7 +379,7 @@ ENDTEXT
 
     def find_interesting_lines(backtrace)
       backtrace.reject { |line|
-        line =~ /test\/unit\/|neo\.rb|minitest/
+        line =~ /neo\.rb/
       }
     end
 
