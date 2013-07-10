@@ -70,7 +70,7 @@ class AboutBlocks < Neo::Koan
     add_one = lambda { |n| n + 1 }
     assert_equal __(11), add_one.call(10)
 
-    # Alternative calling sequence
+    # Alternative calling syntax
     assert_equal __(11), add_one[10]
   end
 
