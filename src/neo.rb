@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 # -*- ruby -*-
 
-require 'test/unit/assertions'
 begin
   require 'win32console'
 rescue LoadError
@@ -139,20 +138,68 @@ module Neo
     end
   end
 
+  module Assertions
+    FailedAssertionError = Class.new(StandardError)
+
+    def flunk(msg)
+      raise FailedAssertionError, msg
+    end
+
+    def assert(condition, msg=nil)
+      msg ||= "Failed assertion."
+      flunk(msg) unless condition
+      true
+    end
+
+    def assert_equal(expected, actual, msg=nil)
+      msg ||= "Expected #{expected.inspect} to equal #{actual.inspect}"
+      assert(expected == actual, msg)
+    end
+
+    def assert_not_equal(expected, actual, msg=nil)
+      msg ||= "Expected #{expected.inspect} to not equal #{actual.inspect}"
+      assert(expected != actual, msg)
+    end
+
+    def assert_nil(actual, msg=nil)
+      msg ||= "Expected #{actual.inspect} to be nil"
+      assert(nil == actual, msg)
+    end
+
+    def assert_not_nil(actual, msg=nil)
+      msg ||= "Expected #{actual.inspect} to not be nil"
+      assert(nil != actual, msg)
+    end
+
+    def assert_match(pattern, actual, msg=nil)
+      msg ||= "Expected #{actual.inspect} to match #{pattern.inspect}"
+      assert pattern =~ actual, msg
+    end
+
+    def assert_raise(exception)
+      begin
+        yield
+      rescue Exception => ex
+        expected = ex.is_a?(exception)
+        assert(expected, "Exception #{exception.inspect} expected, but #{ex.inspect} was raised")
+        return ex
+      end
+      flunk "Exception #{exception.inspect} expected, but nothing raised"
+    end
+
+    def assert_nothing_raised
+      begin
+        yield
+      rescue Exception => ex
+        flunk "Expected nothing to be raised, but exception #{exception.inspect} was raised"
+      end
+    end
+  end
+
   class Sensei
     attr_reader :failure, :failed_test, :pass_count
 
-    in_ruby_version("1.8") do
-      AssertionError = Test::Unit::AssertionFailedError
-    end
-
-    in_ruby_version("1.9", "2.0") do
-      if defined?(MiniTest)
-        AssertionError = MiniTest::Assertion
-      else
-        AssertionError = Test::Unit::AssertionFailedError
-      end
-    end
+    FailedAssertionError = Assertions::FailedAssertionError
 
     def initialize
       @pass_count = 0
@@ -204,7 +251,7 @@ module Neo
     end
 
     def assert_failed?
-      failure.is_a?(AssertionError)
+      failure.is_a?(FailedAssertionError)
     end
 
     def instruct
@@ -366,7 +413,7 @@ ENDTEXT
   end
 
   class Koan
-    include Test::Unit::Assertions
+    include Assertions
 
     attr_reader :name, :failure, :koan_count, :step_count, :koan_file
 
@@ -396,12 +443,12 @@ ENDTEXT
       setup
       begin
         send(name)
-      rescue StandardError, Neo::Sensei::AssertionError => ex
+      rescue StandardError, Neo::Sensei::FailedAssertionError => ex
         failed(ex)
       ensure
         begin
           teardown
-        rescue StandardError, Neo::Sensei::AssertionError => ex
+        rescue StandardError, Neo::Sensei::FailedAssertionError => ex
           failed(ex) if passed?
         end
       end
