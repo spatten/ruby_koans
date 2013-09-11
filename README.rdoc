@@ -36,7 +36,7 @@ Windows from the command prompt (+cmd.exe+)
    c:\ruby --version
    c:\rake --version
 
-If you don't have +rake+ installed, just run +gem install rake+
+If you don't have +rake+ installed, just run <code>gem install rake</code>
 
 Any response for Ruby with a version number greater than 1.8 is fine (should be
 around 1.8.6 or more). Any version of +rake+ will do.
