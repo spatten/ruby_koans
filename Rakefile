@@ -125,7 +125,7 @@ end
 
 task :run do
   puts 'koans'
-  Dir.chdir("${SRC_DIR}") do
+  Dir.chdir("#{SRC_DIR}") do
     puts "in #{Dir.pwd}"
     sh "ruby path_to_enlightenment.rb"
   end
