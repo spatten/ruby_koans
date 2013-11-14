@@ -63,6 +63,13 @@ class AboutMessagePassing < Neo::Koan
     assert_equal __([3, 4, nil, 6]), mc.send(:add_a_payload, 3, 4, nil, 6)
   end
 
+  # NOTE:
+  #
+  # Both obj.msg and obj.send(:msg) sends the message named :msg to
+  # the object. We use "send" when the name of the message can vary
+  # dynamically (e.g. calculated at run time), but by far the most
+  # common way of sending a message is just to say: obj.msg.
+
   # ------------------------------------------------------------------
 
   class TypicalObject
