@@ -3,10 +3,10 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 class AboutIteration < Neo::Koan
 
   # -- An Aside ------------------------------------------------------
-  # Ruby 1.8 stores names as strings. Ruby 1.9 stores names as
-  # symbols. So we use a version dependent method "as_name" to convert
-  # to the right format in the koans.  We will use "as_name" whenever
-  # comparing to lists of methods.
+  # Ruby 1.8 stores names as strings. Ruby 1.9 and later stores names
+  # as symbols. So we use a version dependent method "as_name" to
+  # convert to the right format in the koans. We will use "as_name"
+  # whenever comparing to lists of methods.
 
   in_ruby_version("1.8") do
     def as_name(name)
@@ -14,7 +14,7 @@ class AboutIteration < Neo::Koan
     end
   end
 
-  in_ruby_version("1.9", "2.0") do
+  in_ruby_version("1.9", "2") do
     def as_name(name)
       name.to_sym
     end
