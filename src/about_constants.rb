@@ -1,8 +1,8 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 C = "top level"
 
-class AboutConstants < EdgeCase::Koan
+class AboutConstants < Neo::Koan
 
   C = "nested"
 

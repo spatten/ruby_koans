@@ -1,0 +1,12 @@
+= Deploying a new Ruby Koans ZIP file
+
+The "Download" button on the rubykoans.com web-site points to the
+download/rubykoans.zip file in the github repository. So to update the
+download target on the web-site, just rebuild the .zip file, commit
+and push the changes.
+
+    rake package
+    git add download
+    git push
+
+That's it.

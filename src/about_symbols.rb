@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutSymbols < EdgeCase::Koan
+class AboutSymbols < Neo::Koan
   def test_symbols_are_symbols
     symbol = :ruby
     assert_equal __(true), symbol.is_a?(Symbol)
@@ -50,14 +50,14 @@ class AboutSymbols < EdgeCase::Koan
   def test_symbols_with_spaces_can_be_built
     symbol = :"cats and dogs"
 
-    assert_equal symbol, __("cats and dogs").to_sym
+    assert_equal __("cats and dogs").to_sym, symbol
   end
 
   def test_symbols_with_interpolation_can_be_built
     value = "and"
     symbol = :"cats #{value} dogs"
 
-    assert_equal symbol, __("cats and dogs").to_sym
+    assert_equal __("cats and dogs").to_sym, symbol
   end
 
   def test_to_s_is_called_on_interpolated_symbols

@@ -1,11 +1,11 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutSandwichCode < EdgeCase::Koan
+class AboutSandwichCode < Neo::Koan
 
   def count_lines(file_name)
     file = open(file_name)
     count = 0
-    while line = file.gets
+    while file.gets
       count += 1
     end
     count
@@ -66,7 +66,7 @@ class AboutSandwichCode < EdgeCase::Koan
   def count_lines2(file_name)
     file_sandwich(file_name) do |file|
       count = 0
-      while line = file.gets
+      while file.gets
         count += 1
       end
       count
@@ -99,7 +99,7 @@ class AboutSandwichCode < EdgeCase::Koan
   def count_lines3(file_name)
     open(file_name) do |file|
       count = 0
-      while line = file.gets
+      while file.gets
         count += 1
       end
       count

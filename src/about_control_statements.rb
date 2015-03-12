@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutControlStatements < EdgeCase::Koan
+class AboutControlStatements < Neo::Koan
 
   def test_if_then_else_statements
     if true
@@ -129,6 +129,14 @@ class AboutControlStatements < EdgeCase::Koan
       result << item.upcase
     end
     assert_equal [__("FISH"), __("AND"), __("CHIPS")], result
+  end
+
+  def test_times_statement
+    sum = 0
+    10.times do
+      sum += 1
+    end
+    assert_equal __(10), sum
   end
 
 end

@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutStrings < EdgeCase::Koan
+class AboutStrings < Neo::Koan
   def test_double_quoted_strings_are_strings
     string = "Hello, World"
     assert_equal __(true), string.is_a?(String)
@@ -42,6 +42,7 @@ It was the worst of times.
 }
     assert_equal __(54), long_string.length
     assert_equal __(3), long_string.lines.count
+    assert_equal __("\n"), long_string[0,1]
   end
 
   def test_here_documents_can_also_handle_multiple_lines
@@ -51,6 +52,7 @@ It was the worst of times.
 EOS
     assert_equal __(53), long_string.length
     assert_equal __(2), long_string.lines.count
+    assert_equal __("I"), long_string[0,1]
   end
 
   def test_plus_will_concatenate_two_strings
@@ -149,7 +151,7 @@ EOS
   end
 
   in_ruby_version("1.8") do
-    def test_in_ruby_1_8_single_characters_are_represented_by_integers
+    def test_in_older_ruby_single_characters_are_represented_by_integers
       assert_equal __(97, 'a'), ?a
       assert_equal __(true, false), ?a == 97
 
@@ -157,8 +159,8 @@ EOS
     end
   end
 
-  in_ruby_version("1.9") do
-    def test_in_ruby_1_9_single_characters_are_represented_by_strings
+  in_ruby_version("1.9", "2") do
+    def test_in_modern_ruby_single_characters_are_represented_by_strings
       assert_equal __('a'), ?a
       assert_equal __(false), ?a == 97
     end

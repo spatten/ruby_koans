@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 # -*- ruby -*-
 
-require 'test/unit/assertions'
 begin
   require 'win32console'
 rescue LoadError
@@ -65,7 +64,7 @@ class Object
     end
   end
 
-  in_ruby_version("1.9") do
+  in_ruby_version("1.9", "2") do
     public :method_missing
   end
 end
@@ -83,7 +82,7 @@ class String
   end
 end
 
-module EdgeCase
+module Neo
   class << self
     def simple_output
       ENV['SIMPLE_KOAN_OUTPUT'] == 'true'
@@ -139,20 +138,68 @@ module EdgeCase
     end
   end
 
+  module Assertions
+    FailedAssertionError = Class.new(StandardError)
+
+    def flunk(msg)
+      raise FailedAssertionError, msg
+    end
+
+    def assert(condition, msg=nil)
+      msg ||= "Failed assertion."
+      flunk(msg) unless condition
+      true
+    end
+
+    def assert_equal(expected, actual, msg=nil)
+      msg ||= "Expected #{expected.inspect} to equal #{actual.inspect}"
+      assert(expected == actual, msg)
+    end
+
+    def assert_not_equal(expected, actual, msg=nil)
+      msg ||= "Expected #{expected.inspect} to not equal #{actual.inspect}"
+      assert(expected != actual, msg)
+    end
+
+    def assert_nil(actual, msg=nil)
+      msg ||= "Expected #{actual.inspect} to be nil"
+      assert(nil == actual, msg)
+    end
+
+    def assert_not_nil(actual, msg=nil)
+      msg ||= "Expected #{actual.inspect} to not be nil"
+      assert(nil != actual, msg)
+    end
+
+    def assert_match(pattern, actual, msg=nil)
+      msg ||= "Expected #{actual.inspect} to match #{pattern.inspect}"
+      assert pattern =~ actual, msg
+    end
+
+    def assert_raise(exception)
+      begin
+        yield
+      rescue Exception => ex
+        expected = ex.is_a?(exception)
+        assert(expected, "Exception #{exception.inspect} expected, but #{ex.inspect} was raised")
+        return ex
+      end
+      flunk "Exception #{exception.inspect} expected, but nothing raised"
+    end
+
+    def assert_nothing_raised
+      begin
+        yield
+      rescue Exception => ex
+        flunk "Expected nothing to be raised, but exception #{exception.inspect} was raised"
+      end
+    end
+  end
+
   class Sensei
     attr_reader :failure, :failed_test, :pass_count
 
-    in_ruby_version("1.8") do
-      AssertionError = Test::Unit::AssertionFailedError
-    end
-
-    in_ruby_version("1.9") do
-      if defined?(MiniTest)
-        AssertionError = MiniTest::Assertion
-      else
-        AssertionError = Test::Unit::AssertionFailedError
-      end
-    end
+    FailedAssertionError = Assertions::FailedAssertionError
 
     def initialize
       @pass_count = 0
@@ -195,7 +242,7 @@ module EdgeCase
         @failure = step.failure
         add_progress(@pass_count)
         @observations << Color.red("#{step.koan_file}##{step.name} has damaged your karma.")
-        throw :edgecase_exit
+        throw :neo_exit
       end
     end
 
@@ -204,7 +251,7 @@ module EdgeCase
     end
 
     def assert_failed?
-      failure.is_a?(AssertionError)
+      failure.is_a?(FailedAssertionError)
     end
 
     def instruct
@@ -221,7 +268,7 @@ module EdgeCase
 
     def show_progress
       bar_width = 50
-      total_tests = EdgeCase::Koan.total_tests
+      total_tests = Neo::Koan.total_tests
       scale = bar_width.to_f/total_tests
       print Color.green("your path thus far [")
       happy_steps = (pass_count*scale).to_i
@@ -237,7 +284,7 @@ module EdgeCase
     end
 
     def end_screen
-      if EdgeCase.simple_output
+      if Neo.simple_output
         boring_end_screen
       else
         artistic_end_screen
@@ -268,13 +315,13 @@ module EdgeCase
  ,:::::::::::,                                                    ::::::::::::,
  :::::::::::,                                                     ,::::::::::::
 :::::::::::::                                                     ,::::::::::::
-::::::::::::                      Ruby Koans                       ::::::::::::,
-::::::::::::#{                  ruby_version                     },::::::::::::,
-:::::::::::,                                                      , ::::::::::::
-,:::::::::::::,                brought to you by                 ,,::::::::::::,
+::::::::::::                      Ruby Koans                       ::::::::::::
+::::::::::::#{                  ruby_version                     },::::::::::::
+:::::::::::,                                                      , :::::::::::
+,:::::::::::::,                brought to you by                 ,,::::::::::::
 ::::::::::::::                                                    ,::::::::::::
  ::::::::::::::,                                                 ,:::::::::::::
- ::::::::::::,             EdgeCase Software Artisans           , ::::::::::::
+ ::::::::::::,               Neo Software Artisans              , ::::::::::::
   :,::::::::: ::::                                               :::::::::::::
    ,:::::::::::  ,:                                          ,,:::::::::::::,
      ::::::::::::                                           ,::::::::::::::,
@@ -309,11 +356,7 @@ ENDTEXT
       puts Color.red(indent(failure.message).join)
       puts
       puts "Please meditate on the following code:"
-      if assert_failed?
-        puts embolden_first_line_only(indent(find_interesting_lines(failure.backtrace)))
-      else
-        puts embolden_first_line_only(indent(failure.backtrace))
-      end
+      puts embolden_first_line_only(indent(find_interesting_lines(failure.backtrace)))
       puts
     end
 
@@ -336,7 +379,7 @@ ENDTEXT
 
     def find_interesting_lines(backtrace)
       backtrace.reject { |line|
-        line =~ /test\/unit\/|edgecase\.rb|minitest/
+        line =~ /neo\.rb/
       }
     end
 
@@ -366,7 +409,7 @@ ENDTEXT
   end
 
   class Koan
-    include Test::Unit::Assertions
+    include Assertions
 
     attr_reader :name, :failure, :koan_count, :step_count, :koan_file
 
@@ -396,19 +439,19 @@ ENDTEXT
       setup
       begin
         send(name)
-      rescue StandardError, EdgeCase::Sensei::AssertionError => ex
+      rescue StandardError, Neo::Sensei::FailedAssertionError => ex
         failed(ex)
       ensure
         begin
           teardown
-        rescue StandardError, EdgeCase::Sensei::AssertionError => ex
+        rescue StandardError, Neo::Sensei::FailedAssertionError => ex
           failed(ex) if passed?
         end
       end
       self
     end
 
-    # Class methods for the EdgeCase test suite.
+    # Class methods for the Neo test suite.
     class << self
       def inherited(subclass)
         subclasses << subclass
@@ -465,7 +508,7 @@ ENDTEXT
 
   class ThePath
     def walk
-      sensei = EdgeCase::Sensei.new
+      sensei = Neo::Sensei.new
       each_step do |step|
         sensei.observe(step.meditate)
       end
@@ -473,9 +516,9 @@ ENDTEXT
     end
 
     def each_step
-      catch(:edgecase_exit) {
+      catch(:neo_exit) {
         step_count = 0
-        EdgeCase::Koan.subclasses.each_with_index do |koan,koan_index|
+        Neo::Koan.subclasses.each_with_index do |koan,koan_index|
           koan.testmethods.each do |method_name|
             step = koan.new(method_name, koan.to_s, koan_index+1, step_count+=1)
             yield step
@@ -487,6 +530,6 @@ ENDTEXT
 end
 
 END {
-  EdgeCase::Koan.command_line(ARGV)
-  EdgeCase::ThePath.new.walk
+  Neo::Koan.command_line(ARGV)
+  Neo::ThePath.new.walk
 }

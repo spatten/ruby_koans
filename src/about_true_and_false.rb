@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutTrueAndFalse < EdgeCase::Koan
+class AboutTrueAndFalse < Neo::Koan
   def truth_value(condition)
     if condition
       :true_stuff

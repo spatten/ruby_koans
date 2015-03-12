@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutObjects < EdgeCase::Koan
+class AboutObjects < Neo::Koan
   def test_everything_is_an_object
     assert_equal __(true), 1.is_a?(Object)
     assert_equal __(true), 1.5.is_a?(Object)
@@ -28,12 +28,6 @@ class AboutObjects < EdgeCase::Koan
     obj = Object.new
     another_obj = Object.new
     assert_equal __(true), obj.object_id != another_obj.object_id
-  end
-
-  def test_some_system_objects_always_have_the_same_id
-    assert_equal __(0), false.object_id
-    assert_equal __(2), true.object_id
-    assert_equal __(4), nil.object_id
   end
 
   def test_small_integers_have_fixed_ids

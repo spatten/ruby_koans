@@ -1,12 +1,12 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutIteration < EdgeCase::Koan
+class AboutIteration < Neo::Koan
 
   # -- An Aside ------------------------------------------------------
-  # Ruby 1.8 stores names as strings. Ruby 1.9 stores names as
-  # symbols. So we use a version dependent method "as_name" to convert
-  # to the right format in the koans.  We will use "as_name" whenever
-  # comparing to lists of methods.
+  # Ruby 1.8 stores names as strings. Ruby 1.9 and later stores names
+  # as symbols. So we use a version dependent method "as_name" to
+  # convert to the right format in the koans. We will use "as_name"
+  # whenever comparing to lists of methods.
 
   in_ruby_version("1.8") do
     def as_name(name)
@@ -14,7 +14,7 @@ class AboutIteration < EdgeCase::Koan
     end
   end
 
-  in_ruby_version("1.9") do
+  in_ruby_version("1.9", "2") do
     def as_name(name)
       name.to_sym
     end
@@ -39,19 +39,17 @@ class AboutIteration < EdgeCase::Koan
   def test_each_can_use_curly_brace_blocks_too
     array = [1, 2, 3]
     sum = 0
-    array.each { |item|
-      sum += item
-    }
+    array.each { |item| sum += item }
     assert_equal __(6), sum
   end
 
   def test_break_works_with_each_style_iterations
     array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     sum = 0
-    array.each { |item|
+    array.each do |item|
       break if item > 3
       sum += item
-    }
+    end
     assert_equal __(6), sum
   end
 
@@ -86,7 +84,7 @@ class AboutIteration < EdgeCase::Koan
     result = [2, 3, 4].inject(0) { |sum, item| sum + item }
     assert_equal __(9), result
 
-    result2 = [2, 3, 4].inject(1) { |sum, item| sum * item }
+    result2 = [2, 3, 4].inject(1) { |product, item| product * item }
     assert_equal __(24), result2
 
     # Extra Credit:

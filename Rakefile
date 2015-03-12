@@ -2,25 +2,17 @@
 # -*- ruby -*-
 
 require 'rake/clean'
-begin
-  require 'rdoc/task'
-rescue LoadError => ex
-  # No rdoc task availble.
-end
 
 SRC_DIR      = 'src'
 PROB_DIR     = 'koans'
-DIST_DIR     = 'dist'
+DOWNLOAD_DIR = 'download'
 
 SRC_FILES = FileList["#{SRC_DIR}/*"]
 KOAN_FILES = SRC_FILES.pathmap("#{PROB_DIR}/%f")
 
-today    = Time.now.strftime("%Y-%m-%d")
-TAR_FILE = "#{DIST_DIR}/rubykoans-#{today}.tgz"
-ZIP_FILE = "#{DIST_DIR}/rubykoans-#{today}.zip"
+ZIP_FILE = "#{DOWNLOAD_DIR}/rubykoans.zip"
 
 CLEAN.include("**/*.rbc")
-CLOBBER.include(DIST_DIR)
 
 module Koans
   extend Rake::DSL if defined?(Rake::DSL)
@@ -40,7 +32,7 @@ module Koans
   end
 
   def Koans.make_koan_file(infile, outfile)
-    if infile =~ /edgecase/
+    if infile =~ /neo/
       cp infile, outfile
     else
       open(infile) do |ins|
@@ -90,30 +82,25 @@ task :walk_the_path do
   ruby 'path_to_enlightenment.rb'
 end
 
-if defined?(Rake::RDocTask)
-  Rake::RDocTask.new do |rd|
-    rd.main = "README.rdoc"
-    rd.rdoc_files.include("README.rdoc", "${PROB_DIR}/*.rb")
-  end
-end
-
-directory DIST_DIR
+directory DOWNLOAD_DIR
 directory PROB_DIR
 
-file ZIP_FILE => KOAN_FILES + [DIST_DIR] do
+desc "(re)Build zip file"
+task :zip => [:clobber_zip, :package]
+
+task :clobber_zip do
+  rm ZIP_FILE
+end
+
+file ZIP_FILE => KOAN_FILES + [DOWNLOAD_DIR] do
   sh "zip #{ZIP_FILE} #{PROB_DIR}/*"
 end
 
-file TAR_FILE => KOAN_FILES + [DIST_DIR] do
-  sh "tar zcvf #{TAR_FILE} #{PROB_DIR}"
-end
-
 desc "Create packaged files for distribution"
-task :package => [TAR_FILE, ZIP_FILE]
+task :package => [ZIP_FILE]
 
 desc "Upload the package files to the web server"
-task :upload => [TAR_FILE, ZIP_FILE] do
-  sh "scp #{TAR_FILE} linode:sites/onestepback.org/download"
+task :upload => [ZIP_FILE] do
   sh "scp #{ZIP_FILE} linode:sites/onestepback.org/download"
 end
 
@@ -138,7 +125,7 @@ end
 
 task :run do
   puts 'koans'
-  Dir.chdir("${SRC_DIR}") do
+  Dir.chdir("#{SRC_DIR}") do
     puts "in #{Dir.pwd}"
     sh "ruby path_to_enlightenment.rb"
   end

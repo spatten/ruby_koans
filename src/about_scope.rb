@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutScope < EdgeCase::Koan
+class AboutScope < Neo::Koan
   module Jims
     class Dog
       def identify
@@ -19,7 +19,7 @@ class AboutScope < EdgeCase::Koan
 
   def test_dog_is_not_available_in_the_current_scope
     assert_raise(___(NameError)) do
-      fido = Dog.new
+      Dog.new
     end
   end
 

@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/edgecase')
+require File.expand_path(File.dirname(__FILE__) + '/neo')
 
-class AboutModules < EdgeCase::Koan
+class AboutModules < Neo::Koan
   module Nameable
     def set_name(new_name)
       @name = new_name
@@ -44,7 +44,7 @@ class AboutModules < EdgeCase::Koan
 
   def test_module_methods_are_also_available_in_the_object
     fido = Dog.new
-    assert_nothing_raised(Exception) do # __
+    assert_nothing_raised do # __
       fido.set_name("Rover")
     end
   end
