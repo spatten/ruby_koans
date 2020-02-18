@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # -*- ruby -*-
 
+$VERBOSE = nil
+
 begin
   require 'win32console'
 rescue LoadError
