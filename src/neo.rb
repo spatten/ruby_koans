@@ -25,6 +25,10 @@ def in_ruby_version(*versions)
   yield if versions.any? { |v| ruby_version?(v) }
 end
 
+def before_ruby_version(version)
+  Gem::Version.new(RUBY_VERSION) < Gem::Version.new(version)
+end
+
 in_ruby_version("1.8") do
   class KeyError < StandardError
   end
