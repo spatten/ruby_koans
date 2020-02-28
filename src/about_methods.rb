@@ -126,11 +126,13 @@ class AboutMethods < Neo::Koan
     assert_equal __("a secret"), my_private_method
   end
 
-  def test_calling_private_methods_with_an_explicit_receiver
-    exception = assert_raise(___(NoMethodError)) do
-      self.my_private_method
+  if before_ruby_version("2.7")   # https://github.com/edgecase/ruby_koans/issues/12
+    def test_calling_private_methods_with_an_explicit_receiver
+      exception = assert_raise(___(NoMethodError)) do
+        self.my_private_method
+      end
+      assert_match /#{__("method `my_private_method'")}/, exception.message
     end
-    assert_match /#{__("method `my_private_method'")}/, exception.message
   end
 
   # ------------------------------------------------------------------
