@@ -285,7 +285,7 @@ module Neo
         print Color.cyan('_'*(bar_width-1-happy_steps))
       end
       print Color.green(']')
-      print " #{pass_count}/#{total_tests}"
+      print " #{pass_count}/#{total_tests} (#{pass_count*100/total_tests}%)"
       puts
     end
 
