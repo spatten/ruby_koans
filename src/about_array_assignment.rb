@@ -24,7 +24,7 @@ class AboutArrayAssignment < Neo::Koan
     assert_equal __(["Smith","III"]), last_name
   end
 
-  def test_parallel_assignments_with_too_few_variables
+  def test_parallel_assignments_with_too_few_values
     first_name, last_name = ["Cher"]
     assert_equal __("Cher"), first_name
     assert_equal __(nil), last_name
