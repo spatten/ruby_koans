@@ -30,14 +30,14 @@ class AboutOpenClasses < Neo::Koan
   # ------------------------------------------------------------------
 
   class ::Integer
-    def even?
-      (self % 2) == 0
+    def answer_to_life_universe_and_everything?
+      self == 42
     end
   end
 
   def test_even_existing_built_in_classes_can_be_reopened
-    assert_equal __(false), 1.even?
-    assert_equal __(true), 2.even?
+    assert_equal __(false), 1.answer_to_life_universe_and_everything?
+    assert_equal __(true), 42.answer_to_life_universe_and_everything?
   end
 
   # NOTE: To understand why we need the :: before Integer, you need to
