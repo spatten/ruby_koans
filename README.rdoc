@@ -179,7 +179,7 @@ Brian Marick's fantastic guide for beginners Everyday Scripting with Ruby    :: 
 
 Author         :: Jim Weirich <jim@neo.org>
 Author         :: Joe O'Brien <joe@objo.com>
-Issue Tracker  :: http://www.pivotaltracker.com/projects/48111
+Issue Tracker  :: https://github.com/edgecase/ruby_koans/issues
 Requires       :: Ruby 1.8.x or later and Rake (any recent version)
 
 = License
