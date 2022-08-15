@@ -24,8 +24,20 @@ class AboutKeywordArguments < Neo::Koan
     assert_match(/#{__("wrong number of arguments")}/, exception.message)
   end
 
-  # THINK ABOUT IT:
-  #
-  # Keyword arguments always have a default value, making them optional to the caller
+  def method_with_mandatory_keyword_arguments(one:, two: 'two')
+    [one, two]
+  end
+
+  def test_mandatory_keyword_arguments
+    assert_equal __(['one', 'two']), method_with_mandatory_keyword_arguments(one: 'one')
+    assert_equal __([1, 2]), method_with_mandatory_keyword_arguments(two: 2, one: 1)
+  end
+
+  def test_mandatory_keyword_arguments_without_mandatory_argument
+    exception = assert_raise(___(ArgumentError)) do
+      method_with_mandatory_keyword_arguments
+    end
+    assert_match(/#{__("missing keyword: :one")}/, exception.message)
+  end
 
 end
