@@ -169,7 +169,7 @@ class AboutPatternMatching < Neo::Koan
 
   # ------------------------------------------------------------------
 
-  # Hash patternis quite the same as Array pattern, but it expects #deconsturct_keys(keys) method
+  # Hash pattern is quite the same as Array pattern, but it expects #deconsturct_keys(keys) method
   # It works with symbol keys for now
 
   class LetterAccountant
